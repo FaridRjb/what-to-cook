@@ -82,7 +82,7 @@ public class PosFavActivity extends AppCompatActivity {
         String[] d = getResources().getStringArray(R.array.miveh_sabzi_names);
         String[] e = getResources().getStringArray(R.array.chaashni_names);
         String[] f = getResources().getStringArray(R.array.kareh_roghan_names);
-        String[] g = getResources().getStringArray(R.array.goosht_names);
+        String[] g = getResources().getStringArray(R.array.protein_names);
         String[] h = getResources().getStringArray(R.array.others_names);
         String[][] total = {a, b, c, d, e, f, g, h};
         for (String[] category : total) {

@@ -14,11 +14,11 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/icon_more"
+            android:id="@+id/infoBtn"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
-            android:src="@drawable/ic_more_vert"
+            android:src="@drawable/ic_info"
             android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

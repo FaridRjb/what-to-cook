@@ -20,8 +20,6 @@
         <item>لوبیا قرمز</item>
         <item>لوبیا سبز</item>
         <item>لپه</item>
-        <item>باقالی</item>
-        <item>نخود سبز</item>
     </string-array>
     <string-array name="ghallaat_names">
         <item>برنج</item>
@@ -42,7 +40,6 @@
     </string-array>
     <string-array name="labaniaat_names">
         <item>ماست</item>
-        <item>تخم مرغ</item>
         <item>کشک</item>
         <item>شیر</item>
         <item>دوغ</item>
@@ -59,7 +56,6 @@
         <item>سبزی خشک</item>
         <item>سبزی آش</item>
         <item>خیار</item>
-        <item>آویشن</item>
         <item>سبزی قورمه</item>
         <item>سبزی کوکو</item>
         <item>سبزی معطر</item>
@@ -67,17 +63,12 @@
         <item>به</item>
         <item>هویج</item>
         <item>بادمجان</item>
-        <item>گردو</item>
         <item>شوید</item>
         <item>کرفس</item>
         <item>جعفری</item>
-        <item>کشمش</item>
         <item>سبزی کلم پلو</item>
         <item>کلم برگ</item>
-        <item>آلو برقان</item>
         <item>اسفناج</item>
-        <item>پسته</item>
-        <item>بادام</item>
         <item>پاچ باقلا</item>
         <item>بامیه</item>
         <item>غوره</item>
@@ -85,6 +76,8 @@
         <item>ذرت</item>
         <item>نخود فرنگی</item>
         <item>پیازچه</item>
+        <item>نخود سبز</item>
+        <item>باقالی</item>
     </string-array>
     <string-array name="chaashni_names">
         <item>نمک</item>
@@ -110,17 +103,18 @@
         <item>پودر زیره</item>
         <item>لیمو</item>
         <item>گلپر</item>
-        <item>کنجد</item>
         <item>هل</item>
         <item>ادویه لازانیا</item>
         <item>رب انار</item>
+        <item>آویشن</item>
     </string-array>
     <string-array name="kareh_roghan_names">
         <item>کره</item>
         <item>روغن</item>
         <item>روغن زیتون</item>
+        <item>دنبه</item>
     </string-array>
-    <string-array name="goosht_names">
+    <string-array name="protein_names">
         <item>ژامبون</item>
         <item>سوسیس</item>
         <item>گوشت گوساله</item>
@@ -128,8 +122,8 @@
         <item>گوشت چرخ کرده</item>
         <item>گوشت خورشتی</item>
         <item>مرغ</item>
-        <item>دنبه</item>
         <item>گوشت بوقلمون</item>
+        <item>تخم مرغ</item>
     </string-array>
     <string-array name="others_names">
         <item>مخمر فوری</item>
@@ -137,5 +131,13 @@
         <item>آرد سوخاری</item>
         <item>خیارشور</item>
         <item>سس مایونز</item>
+    </string-array>
+    <string-array name="khoshkbar_names">
+        <item>آلو برقان</item>
+        <item>پسته</item>
+        <item>بادام</item>
+        <item>گردو</item>
+        <item>کشمش</item>
+        <item>کنجد</item>
     </string-array>
 </resources>

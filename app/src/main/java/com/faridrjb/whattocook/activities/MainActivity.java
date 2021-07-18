@@ -2,24 +2,18 @@ package com.faridrjb.whattocook.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextInputEditText inputSearch;
     FloatingActionButton floatingButton;
     Toolbar toolbar;
-    ImageButton more;
+    ImageButton infoBtn;
     TextView posMore;
 
     @SuppressLint("ResourceType")
@@ -74,20 +68,11 @@ public class MainActivity extends AppCompatActivity {
         // Toolbar
         toolbar = findViewById(R.layout.app_bar_main);
         setSupportActionBar(toolbar);
-        more = findViewById(R.id.icon_more);
-        more.setOnClickListener(new View.OnClickListener() {
+        infoBtn = findViewById(R.id.infoBtn);
+        infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu menu = new PopupMenu(MainActivity.this, more);
-                menu.inflate(R.menu.popup_main_more);
-                menu.show();
-                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
-                        return false;
-                    }
-                });
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
         //--------
@@ -143,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         String[] d = getResources().getStringArray(R.array.miveh_sabzi_names);
         String[] e = getResources().getStringArray(R.array.chaashni_names);
         String[] f = getResources().getStringArray(R.array.kareh_roghan_names);
-        String[] g = getResources().getStringArray(R.array.goosht_names);
+        String[] g = getResources().getStringArray(R.array.protein_names);
         String[] h = getResources().getStringArray(R.array.others_names);
         String[][] total = {a, b, c, d, e, f, g, h};
         for (String[] category : total) {

@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Locale;
 
-public class GooshFragment extends Fragment {
+public class KhoshkFragment extends Fragment {
 
     @Nullable
     @Override
@@ -29,7 +29,7 @@ public class GooshFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.list_storage, container, false);
         RecyclerView recyclerView = rootView.findViewById(R.id.itemList1);
 
-        ArrayList<String> itemList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.goosht_names)));
+        ArrayList<String> itemList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.khoshkbar_names)));
         Collator collator = Collator.getInstance(new Locale("fa", "IR"));
         collator.setStrength(Collator.PRIMARY);
         Collections.sort(itemList, collator);
