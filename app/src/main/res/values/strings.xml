@@ -1,0 +1,141 @@
+<resources>
+    <string name="app_name">چی بپزیم؟</string>
+
+    <!-- Intro Slides -->
+    <string-array name="introTitles">
+        <item>انبار من</item>
+        <item>مورد علاقه ها</item>
+    </string-array>
+    <string-array name="introDescriptions">
+        <item>"لیست مواد غذایی موجودتان را با ما به اشتراک بگذارید\n«چی بپزیم؟» دستیار شما در آشپزخانه"</item>
+        <item>"دستور تهیه های مورد علاقه خود را به راحتی جدا کنید\nو در اولین فرصت از طعم آنها لذت ببرید"</item>
+    </string-array>
+    <!---->
+
+    <string-array name="hoboobaat_names">
+        <item>نخود</item>
+        <item>لوبیا چیتی</item>
+        <item>لوبیا سفید</item>
+        <item>عدس</item>
+        <item>لوبیا قرمز</item>
+        <item>لوبیا سبز</item>
+        <item>لپه</item>
+        <item>باقالی</item>
+        <item>نخود سبز</item>
+    </string-array>
+    <string-array name="ghallaat_names">
+        <item>برنج</item>
+        <item>آرد گندم</item>
+        <item>آرد</item>
+        <item>رشته آش</item>
+        <item>ماکارونی</item>
+        <item>نان لواش</item>
+        <item>جو</item>
+        <item>جو پرک</item>
+        <item>آرد برنج</item>
+        <item>بلغور گندم</item>
+        <item>برنج نیم دانه</item>
+        <item>رشته پلویی</item>
+        <item>آرد سفید</item>
+        <item>گندم</item>
+        <item>لازانیا</item>
+    </string-array>
+    <string-array name="labaniaat_names">
+        <item>ماست</item>
+        <item>تخم مرغ</item>
+        <item>کشک</item>
+        <item>شیر</item>
+        <item>دوغ</item>
+        <item>خامه</item>
+    </string-array>
+    <string-array name="miveh_sabzi_names">
+        <item>گوجه فرنگی</item>
+        <item>پیاز</item>
+        <item>نعنا</item>
+        <item>موسیر</item>
+        <item>قارچ</item>
+        <item>فلفل دلمه ای</item>
+        <item>سیر</item>
+        <item>سبزی خشک</item>
+        <item>سبزی آش</item>
+        <item>خیار</item>
+        <item>آویشن</item>
+        <item>سبزی قورمه</item>
+        <item>سبزی کوکو</item>
+        <item>سبزی معطر</item>
+        <item>سیب زمینی</item>
+        <item>به</item>
+        <item>هویج</item>
+        <item>بادمجان</item>
+        <item>گردو</item>
+        <item>شوید</item>
+        <item>کرفس</item>
+        <item>جعفری</item>
+        <item>کشمش</item>
+        <item>سبزی کلم پلو</item>
+        <item>کلم برگ</item>
+        <item>آلو برقان</item>
+        <item>اسفناج</item>
+        <item>پسته</item>
+        <item>بادام</item>
+        <item>پاچ باقلا</item>
+        <item>بامیه</item>
+        <item>غوره</item>
+        <item>کدو سبز</item>
+        <item>ذرت</item>
+        <item>نخود فرنگی</item>
+        <item>پیازچه</item>
+    </string-array>
+    <string-array name="chaashni_names">
+        <item>نمک</item>
+        <item>فلفل</item>
+        <item>رب گوجه فرنگی</item>
+        <item>آبلیمو</item>
+        <item>لیمو عمانی</item>
+        <item>زردچوبه</item>
+        <item>آبغوره</item>
+        <item>دارچین</item>
+        <item>چوب دارچین</item>
+        <item>زعفران</item>
+        <item>بکینگ پودر</item>
+        <item>شکر</item>
+        <item>وانیل</item>
+        <item>پودر پابریکا</item>
+        <item>پودر جوز هندی</item>
+        <item>پودر کاری</item>
+        <item>گلاب</item>
+        <item>برگ بو</item>
+        <item>زرشک</item>
+        <item>تخم گشنیز</item>
+        <item>پودر زیره</item>
+        <item>لیمو</item>
+        <item>گلپر</item>
+        <item>کنجد</item>
+        <item>هل</item>
+        <item>ادویه لازانیا</item>
+        <item>رب انار</item>
+    </string-array>
+    <string-array name="kareh_roghan_names">
+        <item>کره</item>
+        <item>روغن</item>
+        <item>روغن زیتون</item>
+    </string-array>
+    <string-array name="goosht_names">
+        <item>ژامبون</item>
+        <item>سوسیس</item>
+        <item>گوشت گوساله</item>
+        <item>گوشت گوسفند</item>
+        <item>گوشت چرخ کرده</item>
+        <item>گوشت خورشتی</item>
+        <item>مرغ</item>
+        <item>دنبه</item>
+        <item>گوشت بوقلمون</item>
+    </string-array>
+    <string-array name="others_names">
+        <item>مخمر فوری</item>
+        <item>پنیر پیتزا</item>
+        <item>آرد سوخاری</item>
+        <item>خیارشور</item>
+        <item>سس مایونز</item>
+    </string-array>
+</resources>
