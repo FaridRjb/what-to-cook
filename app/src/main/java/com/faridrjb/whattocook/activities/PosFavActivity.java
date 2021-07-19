@@ -75,6 +75,8 @@ public class PosFavActivity extends AppCompatActivity {
     }
 
     private void loadPossibles() {
+        TextView posNotFoundTV = findViewById(R.id.notFoundTV);
+        posNotFoundTV.setVisibility(View.GONE);
         ArrayList<String> allInits = new ArrayList<>();
         String[] a = getResources().getStringArray(R.array.hoboobaat_names);
         String[] b = getResources().getStringArray(R.array.ghallaat_names);
@@ -99,9 +101,12 @@ public class PosFavActivity extends AppCompatActivity {
         }
         foods.clear();
         foods = new FoodsChecker().possibleFoods(this, initsInStorage, dbHelper.getFood(""));
+        if (foods.size() == 0) posNotFoundTV.setVisibility(View.VISIBLE);
     }
 
     private void loadFavorites() {
+        TextView favNotFoundTV = findViewById(R.id.notFoundTV);
+        favNotFoundTV.setVisibility(View.GONE);
         SharedPreferences preferences = getSharedPreferences("Favorite", Context.MODE_PRIVATE);
         ArrayList<Food> foodList = new ArrayList<>();
         foodList = dbHelper.getFood("");
@@ -111,5 +116,6 @@ public class PosFavActivity extends AppCompatActivity {
                 foods.add(foodList.get(i));
             }
         }
+        if (foods.size() == 0) favNotFoundTV.setVisibility(View.VISIBLE);
     }
 }

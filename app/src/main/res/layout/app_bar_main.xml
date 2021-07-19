@@ -13,15 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
+        <ImageButton
             android:id="@+id/infoBtn"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:src="@drawable/ic_info"
-            android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@android:color/white"
+            android:tooltipText="درباره برنامه" />
 
         <TextView
             android:fontFamily="@font/iransansweblight"
@@ -36,6 +37,17 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:id="@+id/helpBtn"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            android:tooltipText="راهنما"
+            app:srcCompat="@drawable/ic_help"
+            app:tint="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -44,6 +44,17 @@
                     app:srcCompat="@drawable/ic_round_arrow_back_24"
                     android:background="?attr/selectableItemBackgroundBorderless"/>
 
+                <ImageButton
+                    android:id="@+id/helpBtn"
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView"
+                    android:tooltipText="راهنما"
+                    app:srcCompat="@drawable/ic_help"
+                    app:tint="@android:color/white" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.appcompat.widget.Toolbar>

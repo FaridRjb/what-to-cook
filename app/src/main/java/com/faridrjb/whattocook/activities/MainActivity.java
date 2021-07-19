@@ -1,5 +1,6 @@
 package com.faridrjb.whattocook.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -112,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // help btn
+        ImageButton helpBtn = findViewById(R.id.helpBtn);
+        helpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHelpDialog();
+            }
+        });
+        //----------
     }
 
     @Override
@@ -121,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadPossibleList() {
+        TextView posNotFoundTV = findViewById(R.id.posNotFoundTV);
+        posNotFoundTV.setVisibility(View.GONE);
         ArrayList<String> allInits = new ArrayList<>();
         String[] a = getResources().getStringArray(R.array.hoboobaat_names);
         String[] b = getResources().getStringArray(R.array.ghallaat_names);
@@ -150,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
             firstFivePossibleFoods.add(possibleFoods.get(i));
             if (firstFivePossibleFoods.size() == 5) break;
         }
+        if (firstFivePossibleFoods.size() == 0) posNotFoundTV.setVisibility(View.VISIBLE);
         RecyclerView resList = findViewById(R.id.possibleList);
         PossibleRVAdapter possiblervAdapter = new PossibleRVAdapter(this, firstFivePossibleFoods);
         resList.setAdapter(possiblervAdapter);
@@ -186,5 +200,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void showHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.dialog_frag_help, null);
+        TextView helpTV = view.findViewById(R.id.helpTV);
+        String s = getResources().getStringArray(R.array.help_texts)[1];
+        helpTV.setText(s);
+        builder.setView(view);
+        builder.create().show();
     }
 }
