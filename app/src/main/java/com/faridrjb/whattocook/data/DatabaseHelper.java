@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Table Names of Data Base.
     static final String TABLE_Name = "data";
 
-    private final String[] allColumns = {Food.KEY_NAME, Food.KEY_INITS,Food.KEY_AMOUNT ,Food.KEY_INSTR, Food.KEY_PHOTO};
+    private final String[] allColumns = {Food.KEY_NAME, Food.KEY_INITS, Food.KEY_AMOUNT, Food.KEY_ESS_INITS, Food.KEY_INSTR, Food.KEY_PHOTO};
 
     public Context context;
     static SQLiteDatabase sqliteDataBase;
@@ -87,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 food.setFoodName(cursor.getString(cursor.getColumnIndex(Food.KEY_NAME)));
                 food.setInitsNeeded(cursor.getString(cursor.getColumnIndex(Food.KEY_INITS)));
                 food.setInitsAmount(cursor.getString(cursor.getColumnIndex(Food.KEY_AMOUNT)));
+                food.setEssInitsNeeded(cursor.getString(cursor.getColumnIndex(Food.KEY_ESS_INITS)));
                 food.setInstruction(cursor.getString(cursor.getColumnIndex(Food.KEY_INSTR)));
                 food.setPhoto(cursor.getString(cursor.getColumnIndex(Food.KEY_PHOTO)));
                 resList.add(food);
@@ -140,6 +141,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = sqliteDataBase.rawQuery("SELECT "+ Food.KEY_AMOUNT +" FROM "+ TABLE_Name +" WHERE "+ Food.KEY_NAME +" = '"+ foodName +"'", null);
         if (cursor.moveToFirst()) {
             res = cursor.getString(cursor.getColumnIndex(Food.KEY_AMOUNT));
+        }
+        return res;
+    }
+
+    public String getEssFoodInits(String foodName) {
+        String res = "";
+        Cursor cursor = sqliteDataBase.rawQuery("SELECT "+ Food.KEY_ESS_INITS +" FROM "+ TABLE_Name +" WHERE "+ Food.KEY_NAME +" = '"+ foodName +"'", null);
+        if (cursor.moveToFirst()) {
+            res = cursor.getString(cursor.getColumnIndex(Food.KEY_ESS_INITS));
         }
         return res;
     }

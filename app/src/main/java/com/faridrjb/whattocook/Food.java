@@ -5,12 +5,14 @@ public class Food {
     public static final String KEY_NAME = "foodName";
     public static final String KEY_INITS = "initsNeeded";
     public static final String KEY_AMOUNT = "initsAmount";
+    public static final String KEY_ESS_INITS = "essInitsNeeded";
     public static final String KEY_INSTR = "instruction";
     public static final String KEY_PHOTO = "photo";
 
     private String foodName;
     private String initsNeeded;
     private String initsAmount;
+    private String essInitsNeeded;
     private String instruction;
     private String photo;
 
@@ -45,6 +47,12 @@ public class Food {
     }
     public void setInitsAmount(String initsAmount) {
         this.initsAmount = initsAmount;
+    }
+    public String getEssInitsNeeded() {
+        return essInitsNeeded;
+    }
+    public void setEssInitsNeeded(String essInitsNeeded) {
+        this.essInitsNeeded = essInitsNeeded;
     }
 
     @Override

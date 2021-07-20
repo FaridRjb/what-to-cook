@@ -23,11 +23,17 @@ public class FoodsChecker {
         this.foodList = foodList;
         ArrayList<Food> possibleFoods = new ArrayList<>();
         for (int i = 0; i < foodList.size(); i++) {
-            if (initsInStorage.containsAll(Arrays.asList(foodList.get(i).getInitsNeeded().split("-")))) {
+            if (initsInStorage.containsAll(Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-")))) {
                 possibleFoods.add(foodList.get(i));
             }
+//            for (String init : Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-"))) {
+//                if (initsInStorage.contains(init)) {
+//                    if (! possibleFoods.contains(foodList.get(i)))
+//                        possibleFoods.add(foodList.get(i));
+//                }
+//            }
             // debug part
-            List<String> a = Arrays.asList(foodList.get(i).getInitsNeeded().split("-"));
+            List<String> a = Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-"));
             for (String init : a) {
                 if (! initsInStorage.contains(init))
                     Log.i("FoodsChecker", foodList.get(i) + ": " + init);
