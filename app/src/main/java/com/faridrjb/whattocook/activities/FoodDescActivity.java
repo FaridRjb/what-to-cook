@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -170,5 +172,20 @@ public class FoodDescActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void onClickWeb(View view) {
+        Intent browserIntent;
+        switch (view.getId()) {
+            case R.id.webTV2:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://parsiday.com"));
+                break;
+            case R.id.webTV3:
+                browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://chishi.ir"));
+                break;
+            default:
+                return;
+        }
+        startActivity(browserIntent);
     }
 }
