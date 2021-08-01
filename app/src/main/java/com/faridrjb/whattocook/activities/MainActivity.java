@@ -143,7 +143,8 @@ public class MainActivity extends AppCompatActivity {
         String[] f = getResources().getStringArray(R.array.kareh_roghan_names);
         String[] g = getResources().getStringArray(R.array.protein_names);
         String[] h = getResources().getStringArray(R.array.others_names);
-        String[][] total = {a, b, c, d, e, f, g, h};
+        String[] j = getResources().getStringArray(R.array.khoshkbar_names);
+        String[][] total = {a, b, c, d, e, f, g, h, j};
         for (String[] category : total) {
             for (String item : category) {
                 allInits.add(item);
