@@ -36,6 +36,7 @@
         <item>لوبیا قرمز</item>
         <item>لوبیا سبز</item>
         <item>لپه</item>
+        <item>لوبیا چشم بلبلی</item>
     </string-array>
     <string-array name="ghallaat_names">
         <item>برنج</item>
@@ -94,6 +95,12 @@
         <item>پیازچه</item>
         <item>نخود سبز</item>
         <item>باقالی</item>
+        <item>سبزی دلمه</item>
+        <item>برگ مو</item>
+        <item>کنگر</item>
+        <item>ریحان</item>
+        <item>شنبلیله</item>
+        <item>کاکوتی</item>
     </string-array>
     <string-array name="chaashni_names">
         <item>نمک</item>
@@ -123,6 +130,11 @@
         <item>ادویه لازانیا</item>
         <item>رب انار</item>
         <item>آویشن</item>
+        <item>پودر سیر</item>
+        <item>ادویه ماهی</item>
+        <item>سرکه</item>
+        <item>رب نارنج</item>
+        <item>پودر پیاز</item>
     </string-array>
     <string-array name="kareh_roghan_names">
         <item>کره</item>
@@ -140,6 +152,9 @@
         <item>مرغ</item>
         <item>گوشت بوقلمون</item>
         <item>تخم مرغ</item>
+        <item>کالباس</item>
+        <item>میگو</item>
+        <item>سوسیس پپرونی</item>
     </string-array>
     <string-array name="others_names">
         <item>مخمر فوری</item>
@@ -147,6 +162,10 @@
         <item>آرد سوخاری</item>
         <item>خیارشور</item>
         <item>سس مایونز</item>
+        <item>سس کچاپ</item>
+        <item>پنیر پارمسان</item>
+        <item>خمیر پیتزا</item>
+        <item>زیتون</item>
     </string-array>
     <string-array name="khoshkbar_names">
         <item>آلو برقان</item>
@@ -155,5 +174,6 @@
         <item>گردو</item>
         <item>کشمش</item>
         <item>کنجد</item>
+        <item>آلو بخارا</item>
     </string-array>
 </resources>
