@@ -101,6 +101,11 @@
         <item>ریحان</item>
         <item>شنبلیله</item>
         <item>کاکوتی</item>
+        <item>ریواس</item>
+        <item>سبزی پلویی</item>
+        <item>سبزی کوفته</item>
+        <item>تره فرنگی</item>
+        <item>خرما</item>
     </string-array>
     <string-array name="chaashni_names">
         <item>نمک</item>
@@ -135,6 +140,7 @@
         <item>سرکه</item>
         <item>رب نارنج</item>
         <item>پودر پیاز</item>
+        <item>رب ازگیل</item>
     </string-array>
     <string-array name="kareh_roghan_names">
         <item>کره</item>
@@ -155,6 +161,8 @@
         <item>کالباس</item>
         <item>میگو</item>
         <item>سوسیس پپرونی</item>
+        <item>ماهی تیلا پیلا</item>
+        <item>ماهی سفید</item>
     </string-array>
     <string-array name="others_names">
         <item>مخمر فوری</item>
@@ -166,6 +174,8 @@
         <item>پنیر پارمسان</item>
         <item>خمیر پیتزا</item>
         <item>زیتون</item>
+        <item>آرد نخودچی</item>
+        <item>پوست پرتقال</item>
     </string-array>
     <string-array name="khoshkbar_names">
         <item>آلو برقان</item>
@@ -175,5 +185,7 @@
         <item>کشمش</item>
         <item>کنجد</item>
         <item>آلو بخارا</item>
+        <item>آلو</item>
+        <item>آلو خورشتی</item>
     </string-array>
 </resources>
