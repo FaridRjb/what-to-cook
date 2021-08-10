@@ -37,6 +37,7 @@
         <item>لوبیا سبز</item>
         <item>لپه</item>
         <item>لوبیا چشم بلبلی</item>
+        <item>ماش</item>
     </string-array>
     <string-array name="ghallaat_names">
         <item>برنج</item>
@@ -54,6 +55,7 @@
         <item>آرد سفید</item>
         <item>گندم</item>
         <item>لازانیا</item>
+        <item>نان تست</item>
     </string-array>
     <string-array name="labaniaat_names">
         <item>ماست</item>
@@ -61,6 +63,8 @@
         <item>شیر</item>
         <item>دوغ</item>
         <item>خامه</item>
+        <item>ماست چکیده</item>
+        <item>ماست خامه ای</item>
     </string-array>
     <string-array name="miveh_sabzi_names">
         <item>گوجه فرنگی</item>
@@ -106,6 +110,8 @@
         <item>سبزی کوفته</item>
         <item>تره فرنگی</item>
         <item>خرما</item>
+        <item>آلبالو</item>
+        <item>کاهو</item>
     </string-array>
     <string-array name="chaashni_names">
         <item>نمک</item>
@@ -141,6 +147,7 @@
         <item>رب نارنج</item>
         <item>پودر پیاز</item>
         <item>رب ازگیل</item>
+        <item>فلفل قرمز</item>
     </string-array>
     <string-array name="kareh_roghan_names">
         <item>کره</item>
@@ -163,6 +170,7 @@
         <item>سوسیس پپرونی</item>
         <item>ماهی تیلا پیلا</item>
         <item>ماهی سفید</item>
+        <item>ماهی کیلکا</item>
     </string-array>
     <string-array name="others_names">
         <item>مخمر فوری</item>
@@ -176,6 +184,8 @@
         <item>زیتون</item>
         <item>آرد نخودچی</item>
         <item>پوست پرتقال</item>
+        <item>سس خردل</item>
+        <item>پودر سوخاری</item>
     </string-array>
     <string-array name="khoshkbar_names">
         <item>آلو برقان</item>
