@@ -3,10 +3,12 @@
 
     <!-- Intro Slides -->
     <string-array name="introTitles">
+        <item>چی بپزیم؟</item>
         <item>انبار من</item>
         <item>مورد علاقه ها</item>
     </string-array>
     <string-array name="introDescriptions">
+        <item>اپلیکیشنی برای آشپزی راحت تر</item>
         <item>"لیست مواد اولیه موجودتون را با ما به اشتراک بگذارید تا بگیم چی میتونید درست کنید\n«چی بپزیم؟» دستیار شما در آشپزخانه"</item>
         <item>"دستور تهیه های مورد علاقه تون رو به راحتی جدا کنید\nو در اولین فرصت از طعم آنها لذت ببرید"</item>
     </string-array>

@@ -3,34 +3,29 @@ package com.faridrjb.whattocook.activities
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.faridrjb.whattocook.fragments.storage.HobFragment
-import com.faridrjb.whattocook.fragments.storage.GhalFragment
-import com.faridrjb.whattocook.fragments.storage.KhoshkFragment
-import com.faridrjb.whattocook.fragments.storage.LabanFragment
-import com.faridrjb.whattocook.fragments.storage.MSabziFragment
-import com.faridrjb.whattocook.fragments.storage.ChaashFragment
-import com.faridrjb.whattocook.fragments.storage.KRoghFragment
-import com.faridrjb.whattocook.fragments.storage.ProteinFragment
-import com.faridrjb.whattocook.fragments.storage.OtherFragment
+import com.faridrjb.whattocook.fragments.InitsCategFragment
 import com.faridrjb.whattocook.R
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import com.faridrjb.whattocook.ViewPagerAdapter
-import java.util.*
 
 class StorageActivity : AppCompatActivity() {
 
     var viewPager: ViewPager? = null
     var tabLayout: TabLayout? = null
     var adapter: ViewPagerAdapter? = null
-    var fragments: List<Fragment> = ArrayList(
-        Arrays.asList(
-            HobFragment(), GhalFragment(), KhoshkFragment(), LabanFragment(), MSabziFragment(),
-            ChaashFragment(), KRoghFragment(), ProteinFragment(), OtherFragment()
-        )
+    var itemsArrayID: List<Int> = listOf(
+        R.array.hoboobaat_names,
+        R.array.ghallaat_names,
+        R.array.khoshkbar_names,
+        R.array.labaniaat_names,
+        R.array.miveh_sabzi_names,
+        R.array.chaashni_names,
+        R.array.kareh_roghan_names,
+        R.array.protein_names,
+        R.array.others_names
     )
     var titles = arrayOf(
         "حبوبات", "غلات", "خشکبار", "لبنیات", "میوه و سبزی", "چاشنی ها",
@@ -68,8 +63,8 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun setUpFragments() {
-        for (i in fragments.indices) {
-            adapter!!.addFragment(fragments[i], titles[i])
+        for (i in itemsArrayID.indices) {
+            adapter!!.addFragment(InitsCategFragment(itemsArrayID[i]), titles[i])
         }
     }
 

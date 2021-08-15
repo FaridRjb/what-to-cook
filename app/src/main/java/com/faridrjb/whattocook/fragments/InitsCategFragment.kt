@@ -1,4 +1,4 @@
-package com.faridrjb.whattocook.fragments.storage
+package com.faridrjb.whattocook.fragments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import java.text.Collator
 import java.util.*
 
-class LabanFragment : Fragment() {
+class InitsCategFragment(var itemsArrayID: Int) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class LabanFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.list_storage, container, false)
         val recyclerView: RecyclerView = rootView.findViewById(R.id.itemList1)
-        val itemList = ArrayList(Arrays.asList(*resources.getStringArray(R.array.labaniaat_names)))
+        val itemList = ArrayList(Arrays.asList(*resources.getStringArray(itemsArrayID)))
         val collator = Collator.getInstance(Locale("fa", "IR"))
         collator.strength = Collator.PRIMARY
         Collections.sort(itemList, collator)

@@ -1,25 +1,25 @@
 package com.faridrjb.whattocook.activities
 
 import androidx.appcompat.app.AppCompatActivity
-import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment.CallBacks
 import androidx.viewpager.widget.ViewPager
 import com.faridrjb.whattocook.R
 import android.os.Bundle
-import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment
-import com.faridrjb.whattocook.fragments.introslider.SlideFragment
-import android.content.SharedPreferences
+import com.faridrjb.whattocook.fragments.SlideFragment
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.faridrjb.whattocook.activities.MainActivity
 import androidx.fragment.app.FragmentPagerAdapter
 import java.util.*
 
-class IntroSliderActivity : AppCompatActivity(), CallBacks {
+class IntroSliderActivity : AppCompatActivity(), SlideFragment.CallBacks {
 
     var viewPager: ViewPager? = null
     var adapter: ViewPagerAdapter? = null
-    private val imgResIds = intArrayOf(R.drawable.ic_kitchen, R.drawable.ic_favorite_filled)
+    private val imgResIds = intArrayOf(
+        R.mipmap.ic_launcher,
+        R.drawable.ic_kitchen,
+        R.drawable.ic_favorite_filled
+    )
     private var titles: List<String> = ArrayList()
     private var descriptions: List<String> = ArrayList()
 
@@ -33,7 +33,9 @@ class IntroSliderActivity : AppCompatActivity(), CallBacks {
         adapter = ViewPagerAdapter(
             supportFragmentManager
         )
-        adapter!!.addFragment(SlideLogoFragment())
+
+        // Add fragments
+//        adapter!!.addFragment(SlideLogoFragment())
         for (i in titles.indices) {
             if (i == titles.size - 1) adapter!!.addFragment(
                 SlideFragment.newSlide(
@@ -48,6 +50,7 @@ class IntroSliderActivity : AppCompatActivity(), CallBacks {
                 )
             )
         }
+        //---------------
         viewPager!!.setAdapter(adapter)
     }
 

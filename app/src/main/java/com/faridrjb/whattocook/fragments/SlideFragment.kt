@@ -1,4 +1,4 @@
-package com.faridrjb.whattocook.fragments.introslider
+package com.faridrjb.whattocook.fragments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +9,6 @@ import android.widget.ImageView
 import com.faridrjb.whattocook.R
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment.CallBacks
-import com.faridrjb.whattocook.fragments.introslider.SlideFragment
 
 class SlideFragment : Fragment() {
 
@@ -37,6 +35,10 @@ class SlideFragment : Fragment() {
             activity!!.nextClicked(v.id)
         }
         return rootView
+    }
+
+    interface CallBacks {
+        fun nextClicked(nextBtnId: Int)
     }
 
     companion object {
