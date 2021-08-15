@@ -1,81 +1,56 @@
-package com.faridrjb.whattocook.activities;
+package com.faridrjb.whattocook.activities
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity
+import com.faridrjb.whattocook.data.DatabaseHelper
+import android.database.sqlite.SQLiteDatabase
+import android.widget.ImageButton
+import com.google.android.material.textfield.TextInputEditText
+import com.faridrjb.whattocook.Food
+import androidx.recyclerview.widget.RecyclerView
+import com.faridrjb.whattocook.recyclerviewadapters.SearchRVAdapter
+import android.os.Bundle
+import com.faridrjb.whattocook.R
+import android.text.TextWatcher
+import android.text.Editable
+import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import java.util.ArrayList
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.ImageButton;
+class SearchActivity : AppCompatActivity() {
 
-import com.faridrjb.whattocook.Food;
-import com.faridrjb.whattocook.recyclerviewadapters.SearchRVAdapter;
-import com.faridrjb.whattocook.R;
-import com.faridrjb.whattocook.data.DatabaseHelper;
-import com.google.android.material.textfield.TextInputEditText;
+    var dbHelper: DatabaseHelper? = null
+    var db: SQLiteDatabase? = null
+    var back: ImageButton? = null
+    var inputSearch: TextInputEditText? = null
+    var foodList: ArrayList<Food>? = null
+    var searchList: RecyclerView? = null
+    var rvAdapter: SearchRVAdapter? = null
 
-import java.util.ArrayList;
-
-
-public class SearchActivity extends AppCompatActivity {
-
-    DatabaseHelper dbHelper;
-    SQLiteDatabase db;
-
-    ImageButton back;
-    TextInputEditText inputSearch;
-    ArrayList<Food> foodList;
-    RecyclerView searchList;
-    SearchRVAdapter rvAdapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-
-        dbHelper = new DatabaseHelper(this);
-        db = dbHelper.getReadableDatabase();
-
-        searchList = findViewById(R.id.searchList);
-        foodList = dbHelper.getFood("");
-
-        refreshDisplay();
-
-        back = findViewById(R.id.icon_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        inputSearch = findViewById(R.id.inputSearch);
-
-        inputSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_search)
+        dbHelper = DatabaseHelper(this)
+        db = dbHelper!!.readableDatabase
+        searchList = findViewById(R.id.searchList)
+        foodList = dbHelper!!.getFood("")
+        refreshDisplay()
+        back = findViewById(R.id.icon_back)
+        back!!.setOnClickListener(View.OnClickListener { finish() })
+        inputSearch = findViewById(R.id.inputSearch)
+        inputSearch!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                foodList = dbHelper!!.getFood(s.toString())
+                refreshDisplay()
             }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                foodList = dbHelper.getFood(String.valueOf(s));
-                refreshDisplay();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
-    private void refreshDisplay() {
-        rvAdapter = new SearchRVAdapter(this, foodList);
-        searchList.setAdapter(rvAdapter);
-        searchList.setLayoutManager(new LinearLayoutManager(this));
+    private fun refreshDisplay() {
+        rvAdapter = SearchRVAdapter(this, foodList!!)
+        searchList!!.adapter = rvAdapter
+        searchList!!.layoutManager = LinearLayoutManager(this)
     }
 }

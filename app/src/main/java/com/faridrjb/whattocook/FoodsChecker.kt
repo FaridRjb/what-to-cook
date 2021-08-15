@@ -1,46 +1,53 @@
-package com.faridrjb.whattocook;
+package com.faridrjb.whattocook
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
+import android.content.Context
+import com.faridrjb.whattocook.Food
+import android.content.SharedPreferences
+import android.util.Log
+import java.util.*
 
-import com.faridrjb.whattocook.activities.MainActivity;
-import com.faridrjb.whattocook.data.DatabaseHelper;
+class FoodsChecker {
 
-import java.util.*;
+    private var context: Context? = null
+    private var foodList = ArrayList<Food>()
+    private var initsInStorage: ArrayList<String>? = null
+    private val preferences: SharedPreferences? = null
 
-public class FoodsChecker {
-
-    private Context context;
-    private ArrayList<Food> foodList = new ArrayList<>();
-    private ArrayList<String> initsInStorage;
-
-    private SharedPreferences preferences;
-
-    public ArrayList<Food> possibleFoods(Context context, ArrayList<String> initsInStorage, ArrayList<Food> foodList) {
-        this.context = context;
-        this.initsInStorage = initsInStorage;
-        this.foodList = foodList;
-        ArrayList<Food> possibleFoods = new ArrayList<>();
-        for (int i = 0; i < foodList.size(); i++) {
-            if (initsInStorage.containsAll(Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-")))) {
-                possibleFoods.add(foodList.get(i));
+    fun possibleFoods(
+        context: Context?,
+        initsInStorage: ArrayList<String>,
+        foodList: ArrayList<Food>
+    ): ArrayList<Food> {
+        this.context = context
+        this.initsInStorage = initsInStorage
+        this.foodList = foodList
+        val possibleFoods = ArrayList<Food>()
+        for (i in foodList.indices) {
+            if (initsInStorage.containsAll(
+                    Arrays.asList(
+                        *foodList[i].essInitsNeeded!!.split("-").toTypedArray()
+                    )
+                )
+            ) {
+                possibleFoods.add(foodList[i])
             }
-//            for (String init : Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-"))) {
+            //            for (String init : Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-"))) {
 //                if (initsInStorage.contains(init)) {
 //                    if (! possibleFoods.contains(foodList.get(i)))
 //                        possibleFoods.add(foodList.get(i));
 //                }
 //            }
             // debug part
-            List<String> a = Arrays.asList(foodList.get(i).getEssInitsNeeded().split("-"));
-            for (String init : a) {
-                if (! initsInStorage.contains(init))
-                    Log.i("FoodsChecker", foodList.get(i) + ": " + init);
+            val a = Arrays.asList(*foodList[i].essInitsNeeded!!.split("-").toTypedArray())
+            for (init in a) {
+                if (!initsInStorage.contains(init)) Log.i(
+                    "FoodsChecker",
+                    foodList[i].toString() + ": " + init
+                )
             }
             //------------
         }
-        Log.i("FoodsChecker", String.valueOf(possibleFoods.size()));
-        return possibleFoods;
+        Log.i("FoodsChecker", possibleFoods.size.toString())
+        return possibleFoods
     }
 }

@@ -38,7 +38,7 @@ class FavoriteFragment : Fragment() {
             intent.putExtra("IntentToPosFav", "Favorite")
             startActivity(intent)
         }
-        val dbHelper = DatabaseHelper(context)
+        val dbHelper = DatabaseHelper(requireContext())
         notFound = rootView.findViewById(R.id.favFragNotFound)
         foodList = ArrayList()
         foodList = dbHelper.getFood("")

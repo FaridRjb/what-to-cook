@@ -1,62 +1,24 @@
-package com.faridrjb.whattocook;
+package com.faridrjb.whattocook
 
-public class Food {
+class Food {
 
-    public static final String KEY_NAME = "foodName";
-    public static final String KEY_INITS = "initsNeeded";
-    public static final String KEY_AMOUNT = "initsAmount";
-    public static final String KEY_ESS_INITS = "essInitsNeeded";
-    public static final String KEY_INSTR = "instruction";
-    public static final String KEY_PHOTO = "photo";
+    var foodName: String? = null
+    var initsNeeded: String? = null
+    var initsAmount: String? = null
+    var essInitsNeeded: String? = null
+    var instruction: String? = null
+    var photo: String? = null
 
-    private String foodName;
-    private String initsNeeded;
-    private String initsAmount;
-    private String essInitsNeeded;
-    private String instruction;
-    private String photo;
-
-    public Food() {};
-
-    public String getFoodName() {
-        return foodName;
-    }
-    public void setFoodName(String foodName) {
-        this.foodName = foodName;
-    }
-    public String getInitsNeeded() {
-        return initsNeeded;
-    }
-    public void setInitsNeeded(String initsNeeded) {
-        this.initsNeeded = initsNeeded;
-    }
-    public String getInstruction() {
-        return instruction;
-    }
-    public void setInstruction(String instruction) {
-        this.instruction = instruction;
-    }
-    public String getPhoto() {
-        return photo;
-    }
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-    public String getInitsAmount() {
-        return initsAmount;
-    }
-    public void setInitsAmount(String initsAmount) {
-        this.initsAmount = initsAmount;
-    }
-    public String getEssInitsNeeded() {
-        return essInitsNeeded;
-    }
-    public void setEssInitsNeeded(String essInitsNeeded) {
-        this.essInitsNeeded = essInitsNeeded;
+    override fun toString(): String {
+        return foodName!!
     }
 
-    @Override
-    public String toString() {
-        return foodName;
+    companion object {
+        const val KEY_NAME = "foodName"
+        const val KEY_INITS = "initsNeeded"
+        const val KEY_AMOUNT = "initsAmount"
+        const val KEY_ESS_INITS = "essInitsNeeded"
+        const val KEY_INSTR = "instruction"
+        const val KEY_PHOTO = "photo"
     }
 }

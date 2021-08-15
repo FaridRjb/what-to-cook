@@ -1,104 +1,91 @@
-package com.faridrjb.whattocook.activities;
+package com.faridrjb.whattocook.activities
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
+import com.faridrjb.whattocook.fragments.storage.HobFragment
+import com.faridrjb.whattocook.fragments.storage.GhalFragment
+import com.faridrjb.whattocook.fragments.storage.KhoshkFragment
+import com.faridrjb.whattocook.fragments.storage.LabanFragment
+import com.faridrjb.whattocook.fragments.storage.MSabziFragment
+import com.faridrjb.whattocook.fragments.storage.ChaashFragment
+import com.faridrjb.whattocook.fragments.storage.KRoghFragment
+import com.faridrjb.whattocook.fragments.storage.ProteinFragment
+import com.faridrjb.whattocook.fragments.storage.OtherFragment
+import com.faridrjb.whattocook.R
+import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.ViewPagerAdapter
+import java.util.*
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
+class StorageActivity : AppCompatActivity() {
 
-import com.faridrjb.whattocook.R;
-import com.faridrjb.whattocook.ViewPagerAdapter;
-import com.faridrjb.whattocook.fragments.storage.ChaashFragment;
-import com.faridrjb.whattocook.fragments.storage.GhalFragment;
-import com.faridrjb.whattocook.fragments.storage.KhoshkFragment;
-import com.faridrjb.whattocook.fragments.storage.ProteinFragment;
-import com.faridrjb.whattocook.fragments.storage.HobFragment;
-import com.faridrjb.whattocook.fragments.storage.KRoghFragment;
-import com.faridrjb.whattocook.fragments.storage.LabanFragment;
-import com.faridrjb.whattocook.fragments.storage.MSabziFragment;
-import com.faridrjb.whattocook.fragments.storage.OtherFragment;
-import com.google.android.material.tabs.TabLayout;
+    var viewPager: ViewPager? = null
+    var tabLayout: TabLayout? = null
+    var adapter: ViewPagerAdapter? = null
+    var fragments: List<Fragment> = ArrayList(
+        Arrays.asList(
+            HobFragment(), GhalFragment(), KhoshkFragment(), LabanFragment(), MSabziFragment(),
+            ChaashFragment(), KRoghFragment(), ProteinFragment(), OtherFragment()
+        )
+    )
+    var titles = arrayOf(
+        "حبوبات", "غلات", "خشکبار", "لبنیات", "میوه و سبزی", "چاشنی ها",
+        "کره و روغن", "محصولات پروتئینی", "غیره"
+    )
+    var icons = intArrayOf(
+        R.drawable.ic_beans, R.drawable.ic_wheat, R.drawable.ic_pistachio, R.drawable.ic_cow,
+        R.drawable.ic_apple, R.drawable.ic_salt, R.drawable.ic_olive_oil,
+        R.drawable.ic_chicken, R.drawable.ic_shopping_cart
+    )
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
-public class StorageActivity extends AppCompatActivity {
-
-    ViewPager viewPager;
-    TabLayout tabLayout;
-    ViewPagerAdapter adapter;
-
-    List<Fragment> fragments = new ArrayList<>(Arrays.asList(
-            new HobFragment(), new GhalFragment(), new KhoshkFragment(), new LabanFragment(), new MSabziFragment(),
-            new ChaashFragment(), new KRoghFragment(), new ProteinFragment(), new OtherFragment()));
-    String[] titles =
-            {"حبوبات", "غلات", "خشکبار", "لبنیات", "میوه و سبزی", "چاشنی ها",
-                    "کره و روغن", "محصولات پروتئینی", "غیره"};
-    int[] icons = {R.drawable.ic_beans, R.drawable.ic_wheat, R.drawable.ic_pistachio, R.drawable.ic_cow,
-            R.drawable.ic_apple, R.drawable.ic_salt, R.drawable.ic_olive_oil,
-            R.drawable.ic_chicken, R.drawable.ic_shopping_cart};
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storage);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_storage)
 
         // back btn
-        ImageButton back = findViewById(R.id.icon_back);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        val back = findViewById<ImageButton>(R.id.icon_back)
+        back.setOnClickListener { finish() }
         //---------
 
         // help btn
-        ImageButton helpBtn = findViewById(R.id.helpBtn);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelpDialog();
-            }
-        });
+        val helpBtn = findViewById<ImageButton>(R.id.helpBtn)
+        helpBtn.setOnClickListener { showHelpDialog() }
         //----------
 
         // setting up fragments
-        viewPager = findViewById(R.id.viewPager);
-        tabLayout = findViewById(R.id.tabs);
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        setUpFragments();
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        setUpIcons();
+        viewPager = findViewById(R.id.viewPager)
+        tabLayout = findViewById(R.id.tabs)
+        adapter = ViewPagerAdapter(supportFragmentManager)
+        setUpFragments()
+        viewPager!!.adapter = adapter
+        tabLayout!!.setupWithViewPager(viewPager)
+        setUpIcons()
         //---------------------
     }
 
-    private void setUpFragments() {
-        for (int i = 0; i < fragments.size(); i++) {
-            adapter.addFragment(fragments.get(i), titles[i]);
+    private fun setUpFragments() {
+        for (i in fragments.indices) {
+            adapter!!.addFragment(fragments[i], titles[i])
         }
     }
 
-    private void setUpIcons() {
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setIcon(icons[i]);
+    private fun setUpIcons() {
+        for (i in 0 until tabLayout!!.tabCount) {
+            tabLayout!!.getTabAt(i)!!.setIcon(icons[i])
         }
     }
 
-    public void showHelpDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_frag_help, null);
-        TextView helpTV = view.findViewById(R.id.helpTV);
-        String s = getResources().getStringArray(R.array.help_texts)[0];
-        helpTV.setText(s);
-        builder.setView(view);
-        builder.create().show();
+    private fun showHelpDialog() {
+        val builder = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.dialog_frag_help, null)
+        val helpTV = view.findViewById<TextView>(R.id.helpTV)
+        val s = resources.getStringArray(R.array.help_texts)[0]
+        helpTV.text = s
+        builder.setView(view)
+        builder.create().show()
     }
 }

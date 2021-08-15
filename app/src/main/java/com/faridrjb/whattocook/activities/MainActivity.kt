@@ -1,215 +1,198 @@
-package com.faridrjb.whattocook.activities;
+package com.faridrjb.whattocook.activities
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import android.animation.Animator
+import androidx.appcompat.app.AppCompatActivity
+import com.faridrjb.whattocook.data.DatabaseHelper
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.widget.ImageButton
+import android.widget.TextView
+import android.annotation.SuppressLint
+import android.os.Bundle
+import com.faridrjb.whattocook.R
+import android.widget.Toast
+import android.content.SharedPreferences
+import android.content.Intent
+import android.view.View
+import com.faridrjb.whattocook.activities.IntroSliderActivity
+import com.faridrjb.whattocook.activities.AboutActivity
+import com.faridrjb.whattocook.fragments.FavoriteFragment
+import android.view.View.OnFocusChangeListener
+import com.faridrjb.whattocook.activities.SearchActivity
+import com.faridrjb.whattocook.activities.StorageActivity
+import com.faridrjb.whattocook.activities.PosFavActivity
+import com.faridrjb.whattocook.Food
+import com.faridrjb.whattocook.FoodsChecker
+import androidx.recyclerview.widget.RecyclerView
+import com.faridrjb.whattocook.recyclerviewadapters.PossibleRVAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.RelativeLayout
+import android.view.ViewAnimationUtils
+import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
+import java.io.IOException
+import java.util.ArrayList
 
-import android.animation.Animator;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+class MainActivity : AppCompatActivity() {
 
-import com.faridrjb.whattocook.Food;
-import com.faridrjb.whattocook.FoodsChecker;
-import com.faridrjb.whattocook.R;
-import com.faridrjb.whattocook.data.DatabaseHelper;
-import com.faridrjb.whattocook.fragments.FavoriteFragment;
-import com.faridrjb.whattocook.recyclerviewadapters.PossibleRVAdapter;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
-
-import java.io.IOException;
-import java.util.ArrayList;
-
-
-public class MainActivity extends AppCompatActivity {
-
-    DatabaseHelper db;
-    TextInputEditText inputSearch;
-    FloatingActionButton floatingButton;
-    Toolbar toolbar;
-    ImageButton infoBtn;
-    TextView posMore;
+    var db: DatabaseHelper? = null
+    var inputSearch: TextInputEditText? = null
+    var floatingButton: FloatingActionButton? = null
+    var toolbar: Toolbar? = null
+    var infoBtn: ImageButton? = null
+    var posMore: TextView? = null
 
     @SuppressLint("ResourceType")
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         // DB
-        db = new DatabaseHelper(this);
+        db = DatabaseHelper(this)
         try {
-            db.createDataBase();
-        } catch (IOException e) {
-            Toast.makeText(this, "Wrong 1", Toast.LENGTH_SHORT).show();
+            db!!.createDataBase()
+        } catch (e: IOException) {
+            Toast.makeText(this, "Wrong 1", Toast.LENGTH_SHORT).show()
         }
-        db.openDataBase();
+        db!!.openDataBase()
         //---
 
         // New Comer
-        SharedPreferences newComerPref = getSharedPreferences("First Time", MODE_PRIVATE);
+        val newComerPref = getSharedPreferences("First Time", MODE_PRIVATE)
         if (newComerPref.getBoolean("First time", true)) {
-
-            startActivity(new Intent(MainActivity.this, IntroSliderActivity.class));
-            finish();
+            startActivity(Intent(this@MainActivity, IntroSliderActivity::class.java))
+            finish()
         }
         //----------
 
         // Toolbar
-        toolbar = findViewById(R.layout.app_bar_main);
-        setSupportActionBar(toolbar);
-        infoBtn = findViewById(R.id.infoBtn);
-        infoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AboutActivity.class));
-            }
-        });
+        toolbar = findViewById(R.layout.app_bar_main)
+        setSupportActionBar(toolbar)
+        infoBtn = findViewById(R.id.infoBtn)
+        infoBtn!!.setOnClickListener(View.OnClickListener {
+            startActivity(
+                Intent(
+                    this@MainActivity,
+                    AboutActivity::class.java
+                )
+            )
+        })
         //--------
 
         // Init
-        inputSearch = findViewById(R.id.inputSearch);
-        floatingButton = findViewById(R.id.floatingButton);
-        posMore = findViewById(R.id.posMore);
+        inputSearch = findViewById(R.id.inputSearch)
+        floatingButton = findViewById(R.id.floatingButton)
+        posMore = findViewById(R.id.posMore)
         //-----
 
         // Favorite Fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.favFragContainer, new FavoriteFragment()).commit();
+        supportFragmentManager.beginTransaction().replace(R.id.favFragContainer, FavoriteFragment())
+            .commit()
         //------------------
-
-        inputSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    startActivity(new Intent(MainActivity.this, SearchActivity.class));
-                    inputSearch.clearFocus();
-                }
+        inputSearch!!.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+                inputSearch!!.clearFocus()
             }
-        });
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startCircularReveal();
-                floatingButton.startAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.zoom_out));
-                startActivity(new Intent(MainActivity.this, StorageActivity.class));
-            }
-        });
-        posMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PosFavActivity.class);
-                intent.putExtra("IntentToPosFav", "PossibleFoods");
-                startActivity(intent);
-            }
-        });
+        }
+        floatingButton!!.setOnClickListener(View.OnClickListener {
+            startCircularReveal()
+            floatingButton!!.startAnimation(
+                AnimationUtils.loadAnimation(
+                    this@MainActivity,
+                    R.anim.zoom_out
+                )
+            )
+            startActivity(Intent(this@MainActivity, StorageActivity::class.java))
+        })
+        posMore!!.setOnClickListener {
+            val intent = Intent(this@MainActivity, PosFavActivity::class.java)
+            intent.putExtra("IntentToPosFav", "PossibleFoods")
+            startActivity(intent)
+        }
 
         // help btn
-        ImageButton helpBtn = findViewById(R.id.helpBtn);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHelpDialog();
-            }
-        });
+        val helpBtn = findViewById<ImageButton>(R.id.helpBtn)
+        helpBtn.setOnClickListener { showHelpDialog() }
         //----------
     }
 
-    @Override
-    protected void onResume() {
-        loadPossibleList();
-        super.onResume();
+    override fun onResume() {
+        loadPossibleList()
+        super.onResume()
     }
 
-    private void loadPossibleList() {
-        TextView posNotFoundTV = findViewById(R.id.posNotFoundTV);
-        posNotFoundTV.setVisibility(View.GONE);
-        ArrayList<String> allInits = new ArrayList<>();
-        String[] a = getResources().getStringArray(R.array.hoboobaat_names);
-        String[] b = getResources().getStringArray(R.array.ghallaat_names);
-        String[] c = getResources().getStringArray(R.array.labaniaat_names);
-        String[] d = getResources().getStringArray(R.array.miveh_sabzi_names);
-        String[] e = getResources().getStringArray(R.array.chaashni_names);
-        String[] f = getResources().getStringArray(R.array.kareh_roghan_names);
-        String[] g = getResources().getStringArray(R.array.protein_names);
-        String[] h = getResources().getStringArray(R.array.others_names);
-        String[] j = getResources().getStringArray(R.array.khoshkbar_names);
-        String[][] total = {a, b, c, d, e, f, g, h, j};
-        for (String[] category : total) {
-            for (String item : category) {
-                allInits.add(item);
+    private fun loadPossibleList() {
+        val posNotFoundTV = findViewById<TextView>(R.id.posNotFoundTV)
+        posNotFoundTV.visibility = View.GONE
+        val allInits = ArrayList<String>()
+        val a = resources.getStringArray(R.array.hoboobaat_names)
+        val b = resources.getStringArray(R.array.ghallaat_names)
+        val c = resources.getStringArray(R.array.labaniaat_names)
+        val d = resources.getStringArray(R.array.miveh_sabzi_names)
+        val e = resources.getStringArray(R.array.chaashni_names)
+        val f = resources.getStringArray(R.array.kareh_roghan_names)
+        val g = resources.getStringArray(R.array.protein_names)
+        val h = resources.getStringArray(R.array.others_names)
+        val j = resources.getStringArray(R.array.khoshkbar_names)
+        val total = arrayOf(a, b, c, d, e, f, g, h, j)
+        for (category in total) {
+            for (item in category) {
+                allInits.add(item)
             }
         }
-        SharedPreferences preferences = getSharedPreferences("Storage", MODE_PRIVATE);
-        ArrayList<String> initsInStorage = new ArrayList<>();
-        for (String item : allInits) {
+        val preferences = getSharedPreferences("Storage", MODE_PRIVATE)
+        val initsInStorage = ArrayList<String>()
+        for (item in allInits) {
             if (preferences.getBoolean(item, false)) {
-                initsInStorage.add(item);
+                initsInStorage.add(item)
             }
         }
-        ArrayList<Food> possibleFoods = new ArrayList<>();
-        ArrayList<Food> firstFivePossibleFoods = new ArrayList<>();
-        possibleFoods = new FoodsChecker().possibleFoods(this, initsInStorage, db.getFood(""));
-        for (int i = 0; i < possibleFoods.size(); i++) { // just show first 5 items
-            firstFivePossibleFoods.add(possibleFoods.get(i));
-            if (firstFivePossibleFoods.size() == 5) break;
+        var possibleFoods = ArrayList<Food>()
+        val firstFivePossibleFoods = ArrayList<Food>()
+        possibleFoods = FoodsChecker().possibleFoods(this, initsInStorage, db!!.getFood(""))
+        for (i in possibleFoods.indices) { // just show first 5 items
+            firstFivePossibleFoods.add(possibleFoods[i])
+            if (firstFivePossibleFoods.size == 5) break
         }
-        if (firstFivePossibleFoods.size() == 0) posNotFoundTV.setVisibility(View.VISIBLE);
-        RecyclerView resList = findViewById(R.id.possibleList);
-        PossibleRVAdapter possiblervAdapter = new PossibleRVAdapter(this, firstFivePossibleFoods);
-        resList.setAdapter(possiblervAdapter);
-        resList.setLayoutManager(new LinearLayoutManager(this));
+        if (firstFivePossibleFoods.size == 0) posNotFoundTV.visibility = View.VISIBLE
+        val resList = findViewById<RecyclerView>(R.id.possibleList)
+        val possiblervAdapter = PossibleRVAdapter(this, firstFivePossibleFoods)
+        resList.adapter = possiblervAdapter
+        resList.layoutManager = LinearLayoutManager(this)
     }
 
-    private void startCircularReveal() {
-        final RelativeLayout revealLayout = findViewById(R.id.layoutReveal);
-            int centerX = (floatingButton.getRight() + floatingButton.getLeft()) / 2;
-            int centerY = (floatingButton.getBottom() + floatingButton.getTop()) / 2;
-            float endRadius = (float) Math.hypot(revealLayout.getWidth(), revealLayout.getHeight());
-        revealLayout.setVisibility(View.VISIBLE);
-        Animator revealAnimator = ViewAnimationUtils.createCircularReveal(revealLayout,
-                centerX, centerY, 0, endRadius);
-        revealAnimator.setDuration(200).start();
-        revealAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
+    private fun startCircularReveal() {
+        val revealLayout = findViewById<RelativeLayout>(R.id.layoutReveal)
+        val centerX = (floatingButton!!.right + floatingButton!!.left) / 2
+        val centerY = (floatingButton!!.bottom + floatingButton!!.top) / 2
+        val endRadius = Math.hypot(revealLayout.width.toDouble(), revealLayout.height.toDouble())
+            .toFloat()
+        revealLayout.visibility = View.VISIBLE
+        val revealAnimator = ViewAnimationUtils.createCircularReveal(
+            revealLayout,
+            centerX, centerY, 0f, endRadius
+        )
+        revealAnimator.setDuration(200).start()
+        revealAnimator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+            override fun onAnimationEnd(animation: Animator) {
+                revealLayout.visibility = View.INVISIBLE
             }
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                revealLayout.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
+            override fun onAnimationCancel(animation: Animator) {}
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
     }
 
-    public void showHelpDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_frag_help, null);
-        TextView helpTV = view.findViewById(R.id.helpTV);
-        String s = getResources().getStringArray(R.array.help_texts)[1];
-        helpTV.setText(s);
-        builder.setView(view);
-        builder.create().show();
+    private fun showHelpDialog() {
+        val builder = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.dialog_frag_help, null)
+        val helpTV = view.findViewById<TextView>(R.id.helpTV)
+        val s = resources.getStringArray(R.array.help_texts)[1]
+        helpTV.text = s
+        builder.setView(view)
+        builder.create().show()
     }
 }
