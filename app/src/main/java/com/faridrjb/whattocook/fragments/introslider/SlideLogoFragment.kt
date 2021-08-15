@@ -1,42 +1,33 @@
-package com.faridrjb.whattocook.fragments.introslider;
+package com.faridrjb.whattocook.fragments.introslider
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment.CallBacks
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.R
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-import com.faridrjb.whattocook.R;
-
-public class SlideLogoFragment extends Fragment {
-
-    private CallBacks activity;
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_logo_slide, container, false);
-        Button next = rootView.findViewById(R.id.btnNext101);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.nextClicked(v.getId());
-            }
-        });
-        return rootView;
+class SlideLogoFragment : Fragment() {
+    private var activity: CallBacks? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity = getActivity() as CallBacks?
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        activity = (CallBacks) getActivity();
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_logo_slide, container, false)
+        val next = rootView.findViewById<Button>(R.id.btnNext101)
+        next.setOnClickListener { v -> activity?.nextClicked(v.id) }
+        return rootView
     }
 
-    public interface CallBacks {
-        void nextClicked(int nextBtnId);
+    interface CallBacks {
+        fun nextClicked(nextBtnId: Int)
     }
 }

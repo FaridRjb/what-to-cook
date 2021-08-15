@@ -1,44 +1,33 @@
-package com.faridrjb.whattocook.fragments.storage;
+package com.faridrjb.whattocook.fragments.storage
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.R
+import androidx.recyclerview.widget.RecyclerView
+import com.faridrjb.whattocook.recyclerviewadapters.StorageItemsAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
+import java.text.Collator
+import java.util.*
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+class KhoshkFragment : Fragment() {
 
-import com.faridrjb.whattocook.R;
-import com.faridrjb.whattocook.recyclerviewadapters.StorageItemsAdapter;
-
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Locale;
-
-public class KhoshkFragment extends Fragment {
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.list_storage, container, false);
-        RecyclerView recyclerView = rootView.findViewById(R.id.itemList1);
-
-        ArrayList<String> itemList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.khoshkbar_names)));
-        Collator collator = Collator.getInstance(new Locale("fa", "IR"));
-        collator.setStrength(Collator.PRIMARY);
-        Collections.sort(itemList, collator);
-
-        StorageItemsAdapter adapter = new StorageItemsAdapter(getContext(), itemList);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-
-        return rootView;
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.list_storage, container, false)
+        val recyclerView: RecyclerView = rootView.findViewById(R.id.itemList1)
+        val itemList = ArrayList(Arrays.asList(*resources.getStringArray(R.array.khoshkbar_names)))
+        val collator = Collator.getInstance(Locale("fa", "IR"))
+        collator.strength = Collator.PRIMARY
+        Collections.sort(itemList, collator)
+        val adapter = StorageItemsAdapter(requireContext(), itemList)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        return rootView
     }
 }

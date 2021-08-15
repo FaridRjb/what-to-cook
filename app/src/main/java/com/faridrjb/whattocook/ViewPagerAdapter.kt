@@ -1,44 +1,29 @@
-package com.faridrjb.whattocook;
+package com.faridrjb.whattocook
 
-import android.preference.PreferenceFragment;
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import java.util.ArrayList
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-import java.util.ArrayList;
-import java.util.List;
+    private val fragmentList: MutableList<Fragment> = ArrayList()
+    private val titles: MutableList<String> = ArrayList()
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
-
-    private List<Fragment> fragmentList = new ArrayList<>();
-    private List<String> titles = new ArrayList<>();
-
-    public ViewPagerAdapter(@NonNull FragmentManager fm) {
-        super(fm);
+    override fun getItem(position: Int): Fragment {
+        return fragmentList[position]
     }
 
-    @NonNull
-    @Override
-    public Fragment getItem(int position) {
-        return fragmentList.get(position);
+    override fun getCount(): Int {
+        return fragmentList.size
     }
 
-    @Override
-    public int getCount() {
-        return fragmentList.size();
+    override fun getPageTitle(position: Int): CharSequence? {
+        return titles[position]
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titles.get(position);
-    }
-
-    public void addFragment(Fragment fragment, String title) {
-        fragmentList.add(fragment);
-        titles.add(title);
+    fun addFragment(fragment: Fragment, title: String) {
+        fragmentList.add(fragment)
+        titles.add(title)
     }
 }

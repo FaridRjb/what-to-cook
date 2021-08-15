@@ -1,73 +1,67 @@
-package com.faridrjb.whattocook.recyclerviewadapters;
+package com.faridrjb.whattocook.recyclerviewadapters
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import android.content.Context
+import com.faridrjb.whattocook.Food
+import androidx.recyclerview.widget.RecyclerView
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import com.faridrjb.whattocook.R
+import android.content.Intent
+import com.faridrjb.whattocook.activities.FoodDescActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.TextView
+import com.makeramen.roundedimageview.RoundedImageView
+import android.widget.RelativeLayout
+import android.content.SharedPreferences
+import android.util.Log
+import android.view.View
+import android.widget.CheckBox
+import java.util.ArrayList
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+class StorageItemsAdapter(context: Context, itemList: ArrayList<String>) :
+    RecyclerView.Adapter<StorageItemsAdapter.ViewHolder>() {
 
-import com.faridrjb.whattocook.R;
+    private var itemList = ArrayList<String>()
+    private val preferences: SharedPreferences
+    private val editor: SharedPreferences.Editor
 
-import java.util.ArrayList;
-
-public class StorageItemsAdapter extends RecyclerView.Adapter<StorageItemsAdapter.ViewHolder> {
-
-    private Context context;
-    private ArrayList<String> itemList = new ArrayList<>();
-
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
-
-    public StorageItemsAdapter(Context context, ArrayList<String> itemList) {
-        this.context = context;
-        this.itemList = itemList;
-
-        preferences = context.getSharedPreferences("Storage", Context.MODE_PRIVATE);
-        editor = preferences.edit();
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_item_storage, parent, false)
+        return ViewHolder(view)
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_storage, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.checkBox.setText(itemList.get(position));
-        holder.checkBox.setChecked(preferences.getBoolean(itemList.get(position), false));
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Shit", "onClick");
-                editor.putBoolean(itemList.get(position), ! preferences.getBoolean(holder.checkBox.getText().toString(), false));
-                editor.commit();
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return itemList.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        CheckBox checkBox;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            checkBox = itemView.findViewById(R.id.checkBox);
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.checkBox.text = itemList[position]
+        holder.checkBox.isChecked = preferences.getBoolean(itemList[position], false)
+        holder.checkBox.setOnClickListener {
+            Log.i("Shit", "onClick")
+            editor.putBoolean(
+                itemList[position],
+                !preferences.getBoolean(holder.checkBox.text.toString(), false)
+            )
+            editor.commit()
         }
+    }
+
+    override fun getItemCount(): Int {
+        return itemList.size
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var checkBox: CheckBox
+
+        init {
+            checkBox = itemView.findViewById(R.id.checkBox)
+        }
+    }
+
+    init {
+        this.itemList = itemList
+        preferences = context.getSharedPreferences("Storage", Context.MODE_PRIVATE)
+        editor = preferences.edit()
     }
 }

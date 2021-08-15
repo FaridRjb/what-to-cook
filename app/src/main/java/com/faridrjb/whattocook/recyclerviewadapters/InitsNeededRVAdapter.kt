@@ -1,61 +1,61 @@
-package com.faridrjb.whattocook.recyclerviewadapters;
+package com.faridrjb.whattocook.recyclerviewadapters
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.content.Context
+import com.faridrjb.whattocook.Food
+import androidx.recyclerview.widget.RecyclerView
+import android.view.ViewGroup
+import android.view.LayoutInflater
+import com.faridrjb.whattocook.R
+import android.content.Intent
+import com.faridrjb.whattocook.activities.FoodDescActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.TextView
+import com.makeramen.roundedimageview.RoundedImageView
+import android.widget.RelativeLayout
+import android.content.SharedPreferences
+import android.view.View
+import android.widget.CheckBox
+import java.util.ArrayList
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.faridrjb.whattocook.R;
-
-import java.util.ArrayList;
-
-public class InitsNeededRVAdapter extends RecyclerView.Adapter<InitsNeededRVAdapter.ViewHolder> {
-
-    private Context context;
-    private ArrayList<String> initsNames = new ArrayList<>();
-    private ArrayList<String> initsAmount = new ArrayList<>();
-
-    public InitsNeededRVAdapter(Context context, ArrayList<String> initsNames, ArrayList<String> initsAmount) {
-        this.context = context;
-        this.initsNames = initsNames;
-        this.initsAmount = initsAmount;
+class InitsNeededRVAdapter(
+    private val context: Context,
+    initsNames: ArrayList<String>,
+    initsAmount: ArrayList<String>
+) : RecyclerView.Adapter<InitsNeededRVAdapter.ViewHolder>() {
+    private var initsNames = ArrayList<String>()
+    private var initsAmount = ArrayList<String>()
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_inits, parent, false)
+        return ViewHolder(view)
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_inits, parent, false);
-        ViewHolder holder = new ViewHolder(view);
-        return holder;
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.initName.text = initsNames[position]
+        holder.initAmount.text = initsAmount[position]
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.initName.setText(initsNames.get(position));
-        holder.initAmount.setText(initsAmount.get(position));
+    override fun getItemCount(): Int {
+        return initsNames.size
     }
 
-    @Override
-    public int getItemCount() {
-        return initsNames.size();
-    }
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var parentLayout: RelativeLayout
+        var initName: TextView
+        var initAmount: TextView
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-
-        RelativeLayout parentLayout;
-        TextView initName, initAmount;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            parentLayout = itemView.findViewById(R.id.layoutInit);
-            initName = itemView.findViewById(R.id.txtInit);
-            initAmount = itemView.findViewById(R.id.txtAmount);
+        init {
+            parentLayout = itemView.findViewById(R.id.layoutInit)
+            initName = itemView.findViewById(R.id.txtInit)
+            initAmount = itemView.findViewById(R.id.txtAmount)
         }
     }
 
+    init {
+        this.initsNames = initsNames
+        this.initsAmount = initsAmount
+    }
 }

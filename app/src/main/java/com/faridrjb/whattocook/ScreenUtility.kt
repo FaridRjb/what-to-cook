@@ -1,27 +1,17 @@
-package com.faridrjb.whattocook;
+package com.faridrjb.whattocook
 
-import android.app.Activity;
-import android.util.DisplayMetrics;
-import android.view.Display;
+import android.app.Activity
+import android.util.DisplayMetrics
 
-public class ScreenUtility {
+class ScreenUtility(activity: Activity) {
 
-    private Activity Activity;
+    val width: Float
 
-    private float width;
-
-    public ScreenUtility(Activity activity) {
-        this.Activity = activity;
-
-        Display display = activity.getWindowManager().getDefaultDisplay();
-        DisplayMetrics metrics = new DisplayMetrics();
-        display.getMetrics(metrics);
-
-        float density = activity.getResources().getDisplayMetrics().density;
-        width = metrics.widthPixels / density;
-    }
-
-    public float getWidth() {
-        return width;
+    init {
+        val display = activity.windowManager.defaultDisplay
+        val metrics = DisplayMetrics()
+        display.getMetrics(metrics)
+        val density = activity.resources.displayMetrics.density
+        width = metrics.widthPixels / density
     }
 }

@@ -1,88 +1,80 @@
-package com.faridrjb.whattocook.activities;
+package com.faridrjb.whattocook.activities
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity
+import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment.CallBacks
+import androidx.viewpager.widget.ViewPager
+import com.faridrjb.whattocook.R
+import android.os.Bundle
+import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment
+import com.faridrjb.whattocook.fragments.introslider.SlideFragment
+import android.content.SharedPreferences
+import android.content.Intent
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.faridrjb.whattocook.activities.MainActivity
+import androidx.fragment.app.FragmentPagerAdapter
+import java.util.*
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
+class IntroSliderActivity : AppCompatActivity(), CallBacks {
 
-import com.faridrjb.whattocook.R;
-import com.faridrjb.whattocook.fragments.introslider.SlideFragment;
-import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment;
+    var viewPager: ViewPager? = null
+    var adapter: ViewPagerAdapter? = null
+    private val imgResIds = intArrayOf(R.drawable.ic_kitchen, R.drawable.ic_favorite_filled)
+    private var titles: List<String> = ArrayList()
+    private var descriptions: List<String> = ArrayList()
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-
-public class IntroSliderActivity extends AppCompatActivity implements SlideLogoFragment.CallBacks {
-
-    ViewPager viewPager;
-    ViewPagerAdapter adapter;
-
-    private int[] imgResIds = {R.drawable.ic_kitchen, R.drawable.ic_favorite_filled};
-    private List<String> titles = new ArrayList<>();
-    private List<String> descriptions = new ArrayList<>();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro_slider);
-
-        titles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.introTitles)));
-        descriptions = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.introDescriptions)));
-
-        viewPager = findViewById(R.id.introSliderVP);
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SlideLogoFragment());
-        for (int i = 0; i <titles.size(); i++) {
-            if (i == titles.size() -1)
-                adapter.addFragment(SlideFragment.newSlide(imgResIds[i], titles.get(i), descriptions.get(i), "شروع کن"));
-            else adapter.addFragment(SlideFragment.newSlide(imgResIds[i], titles.get(i), descriptions.get(i), null));
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_intro_slider)
+        titles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.introTitles)))
+        descriptions =
+            ArrayList(Arrays.asList(*resources.getStringArray(R.array.introDescriptions)))
+        viewPager = findViewById(R.id.introSliderVP)
+        adapter = ViewPagerAdapter(
+            supportFragmentManager
+        )
+        adapter!!.addFragment(SlideLogoFragment())
+        for (i in titles.indices) {
+            if (i == titles.size - 1) adapter!!.addFragment(
+                SlideFragment.newSlide(
+                    imgResIds[i],
+                    titles[i],
+                    descriptions[i],
+                    "شروع کن"
+                )
+            ) else adapter!!.addFragment(
+                SlideFragment.newSlide(
+                    imgResIds[i], titles[i], descriptions[i], null
+                )
+            )
         }
-        viewPager.setAdapter(adapter);
+        viewPager!!.setAdapter(adapter)
     }
 
-    @Override
-    public void nextClicked(int nextBtnId) {
-        if (viewPager.getCurrentItem()+1 == adapter.getCount()) {
-            SharedPreferences preferences = getSharedPreferences("First Time", MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("First time", false);
-            editor.apply();
-            startActivity(new Intent(IntroSliderActivity.this, MainActivity.class));
-            finish();
+    override fun nextClicked(nextBtnId: Int) {
+        if (viewPager!!.currentItem + 1 == adapter!!.count) {
+            val preferences = getSharedPreferences("First Time", MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.putBoolean("First time", false)
+            editor.apply()
+            startActivity(Intent(this@IntroSliderActivity, MainActivity::class.java))
+            finish()
         }
-        viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+        viewPager!!.currentItem = viewPager!!.currentItem + 1
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private List<Fragment> fragmentList = new ArrayList<>();
-
-        public ViewPagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
+    inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        private val fragmentList: MutableList<Fragment> = ArrayList()
+        override fun getItem(position: Int): Fragment {
+            return fragmentList[position]
         }
 
-        @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
+        override fun getCount(): Int {
+            return fragmentList.size
         }
 
-        @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment) {
-            fragmentList.add(fragment);
+        fun addFragment(fragment: Fragment) {
+            fragmentList.add(fragment)
         }
     }
 }

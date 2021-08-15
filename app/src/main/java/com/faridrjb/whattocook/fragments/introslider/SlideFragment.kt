@@ -1,52 +1,59 @@
-package com.faridrjb.whattocook.fragments.introslider;
+package com.faridrjb.whattocook.fragments.introslider
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import com.faridrjb.whattocook.R
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.fragments.introslider.SlideLogoFragment.CallBacks
+import com.faridrjb.whattocook.fragments.introslider.SlideFragment
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+class SlideFragment : Fragment() {
 
-import com.faridrjb.whattocook.R;
-
-public class SlideFragment extends Fragment {
-
-    public static SlideFragment newSlide(int imgResId, String title, String description, @Nullable String btnNext) {
-        SlideFragment fragment = new SlideFragment();
-        Bundle args = new Bundle();
-        args.putInt("imgResId", imgResId);
-        args.putString("title", title);
-        args.putString("description", description);
-        args.putString("btnNext", btnNext);
-        fragment.setArguments(args);
-        return fragment;
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val rootView = inflater.inflate(R.layout.fragment_slide, container, false)
+        val next = rootView.findViewById<Button>(R.id.btnNext102)
+        if (arguments != null) {
+            (rootView.findViewById<ImageView>(R.id.logoImage102)).setImageResource(
+                requireArguments().getInt("imgResId")
+            )
+            (rootView.findViewById<TextView>(R.id.tv103)).text =
+                requireArguments().getString("title")
+            (rootView.findViewById<TextView>(R.id.tv104)).text =
+                requireArguments().getString("description")
+            if (requireArguments().getString("btnNext") != null) next.text =
+                requireArguments().getString("btnNext")
+        }
+        next.setOnClickListener { v ->
+            val activity = activity as CallBacks?
+            activity!!.nextClicked(v.id)
+        }
+        return rootView
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_slide, container, false);
-        Button next = rootView.findViewById(R.id.btnNext102);
-        if (getArguments() != null) {
-            ((ImageView) rootView.findViewById(R.id.logoImage102)).setImageResource(getArguments().getInt("imgResId"));
-            ((TextView) rootView.findViewById(R.id.tv103)).setText(getArguments().getString("title"));
-            ((TextView) rootView.findViewById(R.id.tv104)).setText(getArguments().getString("description"));
-
-            if (getArguments().getString("btnNext") != null) next.setText(getArguments().getString("btnNext"));
+    companion object {
+        fun newSlide(
+            imgResId: Int,
+            title: String?,
+            description: String?,
+            btnNext: String?
+        ): SlideFragment {
+            val fragment = SlideFragment()
+            val args = Bundle()
+            args.putInt("imgResId", imgResId)
+            args.putString("title", title)
+            args.putString("description", description)
+            args.putString("btnNext", btnNext)
+            fragment.arguments = args
+            return fragment
         }
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SlideLogoFragment.CallBacks activity = (SlideLogoFragment.CallBacks) getActivity();
-                activity.nextClicked(v.getId());
-            }
-        });
-        return rootView;
     }
 }
