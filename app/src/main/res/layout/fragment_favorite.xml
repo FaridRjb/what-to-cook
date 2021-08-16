@@ -18,26 +18,28 @@
             android:minHeight="160dp">
 
             <TextView
-                android:fontFamily="@font/iransansweblight"
                 android:id="@+id/favMore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:background="@drawable/background_more_btn"
+                android:fontFamily="@font/iransansweblight"
+                android:paddingHorizontal="4dp"
                 android:text="همه موارد"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#fff"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:fontFamily="@font/iransansweblight"
                 android:id="@+id/tv3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:fontFamily="@font/iransansweblight"
                 android:text="مورد علاقه ها"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
@@ -48,10 +50,10 @@
                 android:id="@+id/recyclerView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1"
-                android:overScrollMode="never"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv3" />
 
