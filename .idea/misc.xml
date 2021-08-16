@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/drawable/background_food_name.xml" value="0.24375" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_intro_slider.xml" value="0.15625" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/fragment_logo_slide.xml" value="0.18478260869565216" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/fragment_slide.xml" value="0.1875" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/list_storage.xml" value="0.18478260869565216" />

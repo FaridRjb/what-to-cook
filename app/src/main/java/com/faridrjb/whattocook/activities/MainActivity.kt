@@ -5,15 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.faridrjb.whattocook.data.DatabaseHelper
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import android.widget.ImageButton
-import android.widget.TextView
 import android.annotation.SuppressLint
 import android.os.Bundle
 import com.faridrjb.whattocook.R
-import android.widget.Toast
 import android.content.SharedPreferences
 import android.content.Intent
+import android.os.Handler
 import android.view.View
+import android.view.View.GONE
 import com.faridrjb.whattocook.activities.IntroSliderActivity
 import com.faridrjb.whattocook.activities.AboutActivity
 import com.faridrjb.whattocook.fragments.FavoriteFragment
@@ -26,9 +25,9 @@ import com.faridrjb.whattocook.FoodsChecker
 import androidx.recyclerview.widget.RecyclerView
 import com.faridrjb.whattocook.recyclerviewadapters.PossibleRVAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.widget.RelativeLayout
 import android.view.ViewAnimationUtils
 import android.view.animation.AnimationUtils
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import java.io.IOException
@@ -63,6 +62,11 @@ class MainActivity : AppCompatActivity() {
         if (newComerPref.getBoolean("First time", true)) {
             startActivity(Intent(this@MainActivity, IntroSliderActivity::class.java))
             finish()
+        } else {
+            Handler().postDelayed(
+                { findViewById<FrameLayout>(R.id.splashFL).visibility = GONE },
+                3000
+            )
         }
         //----------
 
