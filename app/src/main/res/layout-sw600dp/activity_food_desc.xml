@@ -120,7 +120,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="بیشتر..."
-                        android:textColor="@color/colorPrimary"
+                        android:background="@drawable/background_more_btn"
+                        android:paddingHorizontal="4dp"
+                        android:textColor="#fff"
                         android:textStyle="bold"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="8dp"/>
