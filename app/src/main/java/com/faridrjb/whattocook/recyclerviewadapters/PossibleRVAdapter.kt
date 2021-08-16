@@ -14,7 +14,6 @@ import com.makeramen.roundedimageview.RoundedImageView
 import android.widget.RelativeLayout
 import android.content.SharedPreferences
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.CheckBox
 import java.util.ArrayList
 
@@ -40,11 +39,6 @@ class PossibleRVAdapter(private val context: Context, foods: ArrayList<Food>) :
             )
         )
         holder.parentLayout.setOnClickListener {
-            holder.parentLayout.startAnimation(
-                AnimationUtils.loadAnimation(
-                    context, R.anim.zoom_out
-                )
-            )
             val intent = Intent(context, FoodDescActivity::class.java)
             intent.putExtra("name", foods[position].foodName)
             context.startActivity(intent)

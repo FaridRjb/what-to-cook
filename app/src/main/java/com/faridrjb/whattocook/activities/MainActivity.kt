@@ -101,13 +101,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         floatingButton!!.setOnClickListener(View.OnClickListener {
-            startCircularReveal()
-            floatingButton!!.startAnimation(
-                AnimationUtils.loadAnimation(
-                    this@MainActivity,
-                    R.anim.zoom_out
-                )
-            )
             startActivity(Intent(this@MainActivity, StorageActivity::class.java))
         })
         posMore!!.setOnClickListener {
