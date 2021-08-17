@@ -9,11 +9,13 @@ import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.faridrjb.whattocook.databinding.ActivityIntroSliderBinding
 import java.util.*
 
 class IntroSliderActivity : AppCompatActivity(), SlideFragment.CallBacks {
 
-    var viewPager: ViewPager? = null
+    private lateinit var binding: ActivityIntroSliderBinding
+
     var adapter: ViewPagerAdapter? = null
     private val imgResIds = intArrayOf(
         R.mipmap.ic_launcher,
@@ -25,17 +27,18 @@ class IntroSliderActivity : AppCompatActivity(), SlideFragment.CallBacks {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro_slider)
+        binding = ActivityIntroSliderBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         titles = ArrayList(Arrays.asList(*resources.getStringArray(R.array.introTitles)))
         descriptions =
             ArrayList(Arrays.asList(*resources.getStringArray(R.array.introDescriptions)))
-        viewPager = findViewById(R.id.introSliderVP)
         adapter = ViewPagerAdapter(
             supportFragmentManager
         )
 
         // Add fragments
-//        adapter!!.addFragment(SlideLogoFragment())
         for (i in titles.indices) {
             if (i == titles.size - 1) adapter!!.addFragment(
                 SlideFragment.newSlide(
@@ -51,11 +54,11 @@ class IntroSliderActivity : AppCompatActivity(), SlideFragment.CallBacks {
             )
         }
         //---------------
-        viewPager!!.setAdapter(adapter)
+        binding.introSliderVP.adapter = adapter
     }
 
     override fun nextClicked(nextBtnId: Int) {
-        if (viewPager!!.currentItem + 1 == adapter!!.count) {
+        if (binding.introSliderVP.currentItem + 1 == adapter!!.count) {
             val preferences = getSharedPreferences("First Time", MODE_PRIVATE)
             val editor = preferences.edit()
             editor.putBoolean("First time", false)
@@ -63,11 +66,13 @@ class IntroSliderActivity : AppCompatActivity(), SlideFragment.CallBacks {
             startActivity(Intent(this@IntroSliderActivity, MainActivity::class.java))
             finish()
         }
-        viewPager!!.currentItem = viewPager!!.currentItem + 1
+        binding.introSliderVP.currentItem = binding.introSliderVP.currentItem + 1
     }
 
     inner class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
         private val fragmentList: MutableList<Fragment> = ArrayList()
+
         override fun getItem(position: Int): Fragment {
             return fragmentList[position]
         }

@@ -8,9 +8,17 @@
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/drawable/ic_cabbage.xml" value="0.15625" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/font/font.xml" value="0.1" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout-sw600dp/activity_food_desc.xml" value="0.72" />
-        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_food_desc.xml" value="0.536" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_about.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_food_desc.xml" value="0.4" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_intro_slider.xml" value="0.15625" />
-        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_main.xml" value="0.8" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_main.xml" value="0.47508690614136734" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_pos_fav.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_search.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/activity_storage.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/app_bar_food_desc.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/app_bar_main.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/app_bar_search.xml" value="0.18568840579710144" />
+        <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/dialog_frag_help.xml" value="0.18568840579710144" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/fragment_favorite.xml" value="0.1933876811594203" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/fragment_logo_slide.xml" value="0.18478260869565216" />
         <entry key="..\:/Users/farid/AndroidStudioProjects/WhatToCook/app/src/main/res/layout/fragment_slide.xml" value="0.1875" />

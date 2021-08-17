@@ -6,8 +6,8 @@
     android:layout_height="77dp"
     android:background="@color/colorPrimary"
     android:elevation="5dp"
-    app:contentInsetStart="0dp"
-    app:contentInsetLeft="0dp">
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,22 +15,22 @@
 
         <ImageButton
             android:id="@+id/infoBtn"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_info"
+            android:tooltipText="درباره برنامه"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:tint="@android:color/white"
-            android:tooltipText="درباره برنامه" />
+            app:tint="@android:color/white" />
 
         <TextView
-            android:fontFamily="@font/iransansweblight"
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            android:fontFamily="@font/iransansweblight"
             android:text="چی بپزیم؟"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -43,9 +43,9 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?actionBarSize"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:tooltipText="راهنما"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView"
-            android:tooltipText="راهنما"
             app:srcCompat="@drawable/ic_help"
             app:tint="@android:color/white" />
 

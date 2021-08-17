@@ -15,39 +15,42 @@ import androidx.recyclerview.widget.GridLayoutManager
 import android.content.SharedPreferences
 import android.view.View
 import com.faridrjb.whattocook.FoodsChecker
+import com.faridrjb.whattocook.databinding.ActivityPosFavBinding
+import com.faridrjb.whattocook.databinding.ActivityStorageBinding
 import java.util.ArrayList
 
 class PosFavActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityPosFavBinding
+
     private var CAME_FOR: String? = null
-    var posFavRV: RecyclerView? = null
     var adapter: PosFavRVAdapter? = null
     var foods = ArrayList<Food>()
     var dbHelper: DatabaseHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pos_fav)
+        binding = ActivityPosFavBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        posFavRV = findViewById(R.id.posFavRV)
         dbHelper = DatabaseHelper(this)
         dbHelper!!.openDataBase()
-        val title = findViewById<TextView>(R.id.posFavTitle)
         CAME_FOR = intent.getStringExtra(GO_FOR)
         if (CAME_FOR == null) return
         if (CAME_FOR == "PossibleFoods") {
-            title.text = "چیزایی که میتونی درست کنی"
+            binding.posFavTitle.text = "چیزایی که میتونی درست کنی"
             loadPossibles()
         } else if (CAME_FOR == "Favorite") {
-            title.text = "مورد علاقه ها"
+            binding.posFavTitle.text = "مورد علاقه ها"
             loadFavorites()
         }
         adapter = PosFavRVAdapter(this, foods)
-        posFavRV!!.adapter = adapter
+        binding.posFavRV.adapter = adapter
         val screenUtility = ScreenUtility(this)
         val spanCount = (screenUtility.width / 132).toInt()
-        posFavRV!!.layoutManager = GridLayoutManager(this, spanCount)
-        findViewById<View>(R.id.icon_back).setOnClickListener { finish() }
+        binding.posFavRV.layoutManager = GridLayoutManager(this, spanCount)
+        binding.backBtn.setOnClickListener { finish() }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -60,8 +63,7 @@ class PosFavActivity : AppCompatActivity() {
     }
 
     private fun loadPossibles() {
-        val posNotFoundTV = findViewById<TextView>(R.id.notFoundTV)
-        posNotFoundTV.visibility = View.GONE
+        binding.notFoundTV.visibility = View.GONE
         val allInits = ArrayList<String>()
         val a = resources.getStringArray(R.array.hoboobaat_names)
         val b = resources.getStringArray(R.array.ghallaat_names)
@@ -86,12 +88,11 @@ class PosFavActivity : AppCompatActivity() {
         }
         foods.clear()
         foods = FoodsChecker().possibleFoods(this, initsInStorage, dbHelper!!.getFood(""))
-        if (foods.size == 0) posNotFoundTV.visibility = View.VISIBLE
+        if (foods.size == 0) binding.notFoundTV.visibility = View.VISIBLE
     }
 
     private fun loadFavorites() {
-        val favNotFoundTV = findViewById<TextView>(R.id.notFoundTV)
-        favNotFoundTV.visibility = View.GONE
+        binding.notFoundTV.visibility = View.GONE
         val preferences = getSharedPreferences("Favorite", MODE_PRIVATE)
         var foodList = ArrayList<Food>()
         foodList = dbHelper!!.getFood("")
@@ -101,7 +102,7 @@ class PosFavActivity : AppCompatActivity() {
                 foods.add(foodList[i])
             }
         }
-        if (foods.size == 0) favNotFoundTV.visibility = View.VISIBLE
+        if (foods.size == 0) binding.notFoundTV.visibility = View.VISIBLE
     }
 
     companion object {

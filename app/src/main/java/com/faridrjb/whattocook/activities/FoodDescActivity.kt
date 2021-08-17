@@ -19,47 +19,47 @@ import android.net.Uri
 import android.view.View
 import android.widget.*
 import androidx.appcompat.widget.Toolbar
+import com.faridrjb.whattocook.ScreenUtility
+import com.faridrjb.whattocook.databinding.ActivityFoodDescBinding
 import java.util.*
 
 class FoodDescActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityFoodDescBinding
+
     var db: SQLiteDatabase? = null
     var dbHelper: DatabaseHelper? = null
-    var bundle: Bundle? = null
     var FOOD_NAME: String? = null
-    var recyclerView: RecyclerView? = null
-    var likeButton: FloatingActionButton? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_food_desc)
+        binding = ActivityFoodDescBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         dbHelper = DatabaseHelper(this)
         dbHelper!!.openDataBase()
         db = dbHelper!!.readableDatabase
 
         // Toolbar
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val textView = findViewById<TextView>(R.id.tvFoodName)
-        setSupportActionBar(toolbar)
-        val back = findViewById<ImageButton>(R.id.icon_back)
-        back.setOnClickListener { finish() }
+        setSupportActionBar(binding.toolbar.root)
+        binding.toolbar.backBtn.setOnClickListener { finish() }
         //--------
 
         // Food Name
-        bundle = intent.extras
+        val bundle = intent.extras
         if (bundle!!.containsKey("name")) {
-            FOOD_NAME = bundle!!.getString("name")
-            textView.text = FOOD_NAME
+            FOOD_NAME = bundle.getString("name")
+            binding.toolbar.tvFoodName.text = FOOD_NAME
         }
         //----------
         refreshDisplay()
 
         // More
-        val more = findViewById<TextView>(R.id.txtMore)
-        more.setOnClickListener {
-            recyclerView!!.layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
-            recyclerView!!.requestLayout()
-            more.visibility = View.INVISIBLE
+        binding.txtMore.setOnClickListener {
+            binding.recyclerView.layoutParams.height = LinearLayout.LayoutParams.WRAP_CONTENT
+            binding.recyclerView.requestLayout()
+            binding.txtMore.visibility = View.INVISIBLE
         }
         //-----
         addToFavourite()
@@ -67,8 +67,7 @@ class FoodDescActivity : AppCompatActivity() {
 
     private fun refreshDisplay() {
         // Image
-        val image = findViewById<ImageView>(R.id.foodImageView)
-        image.setImageResource(
+        binding.foodImageView.setImageResource(
             applicationContext.resources.getIdentifier(
                 "drawable/" + dbHelper!!.getFoodPhoto(
                     FOOD_NAME!!
@@ -79,58 +78,54 @@ class FoodDescActivity : AppCompatActivity() {
 
         // RecyclerView - Initials List
         val initsList =
-            ArrayList(Arrays.asList(*dbHelper!!.getFoodInits(FOOD_NAME!!).split("-").toTypedArray()))
+            ArrayList(listOf(*dbHelper!!.getFoodInits(FOOD_NAME!!).split("-").toTypedArray()))
         val initsAmountList = ArrayList(
-            Arrays.asList(
+            listOf(
                 *dbHelper!!.getFoodInitsAmount(FOOD_NAME!!).split("-").toTypedArray()
             )
         )
-        recyclerView = findViewById(R.id.recyclerView)
-        val adapter = InitsNeededRVAdapter(this, initsList, initsAmountList)
-        recyclerView!!.adapter = adapter
-        recyclerView!!.layoutManager = LinearLayoutManager(this)
-        if (findViewById<View?>(R.id.f_d_c_sw600dp) != null) recyclerView!!.layoutManager =
+        binding.recyclerView.adapter = InitsNeededRVAdapter(this, initsList, initsAmountList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        if (ScreenUtility(this@FoodDescActivity).width >= 600) binding.recyclerView.layoutManager =
             GridLayoutManager(this, 2)
         //-----------------------------
 
         // Instruction
-        val instruction = findViewById<TextView>(R.id.txtInstruction)
-        instruction.text = dbHelper!!.getFoodInstruc(FOOD_NAME!!)
+        binding.txtInstruction.text = dbHelper!!.getFoodInstruc(FOOD_NAME!!)
         //------------
     }
 
     private fun addToFavourite() {
-        likeButton = findViewById(R.id.likeButton)
         val preferences = getSharedPreferences(FAVORITE_PREF, MODE_PRIVATE)
         val editor = preferences.edit()
         if (preferences.getBoolean(FOOD_NAME, false)) {
-            likeButton!!.setImageResource(R.drawable.ic_favorite_filled)
+            binding.likeBtn.setImageResource(R.drawable.ic_favorite_filled)
         }
-        likeButton!!.setOnClickListener(View.OnClickListener {
+        binding.likeBtn.setOnClickListener(View.OnClickListener {
             if (!preferences.getBoolean(FOOD_NAME, false)) {
                 startCircularReveal()
                 editor.putBoolean(FOOD_NAME, true)
-                likeButton!!.setImageResource(R.drawable.ic_favorite_filled)
+                binding.likeBtn.setImageResource(R.drawable.ic_favorite_filled)
             } else if (preferences.getBoolean(FOOD_NAME, false)) {
                 editor.putBoolean(FOOD_NAME, false)
-                likeButton!!.setImageResource(R.drawable.ic_favorite)
+                binding.likeBtn.setImageResource(R.drawable.ic_favorite)
             }
             editor.apply()
         })
     }
 
     private fun startCircularReveal() {
-        val changeableLayout = findViewById<RelativeLayout>(R.id.layoutChangeable)
-        val centerX = (likeButton!!.right + likeButton!!.left) / 2
-        val centerY = (likeButton!!.bottom + likeButton!!.top) / 2
+        val cL = binding.layoutChangeable
+        val centerX = (binding.likeBtn.right + binding.likeBtn.left) / 2
+        val centerY = (binding.likeBtn.bottom + binding.likeBtn.top) / 2
         val endRadius =
-            Math.hypot(changeableLayout.width.toDouble(), changeableLayout.height.toDouble())
+            Math.hypot(cL.width.toDouble(), cL.height.toDouble())
                 .toFloat()
-        changeableLayout.visibility = View.VISIBLE
-        changeableLayout.alpha = 0.0f
-        changeableLayout.animate().alpha(1.0f).setDuration(350).start()
+        cL.visibility = View.VISIBLE
+        cL.alpha = 0.0f
+        cL.animate().alpha(1.0f).setDuration(350).start()
         val revealAnimator = ViewAnimationUtils.createCircularReveal(
-            changeableLayout,
+            cL,
             centerX, centerY, endRadius, 0f
         )
         revealAnimator.duration = 500
@@ -138,7 +133,7 @@ class FoodDescActivity : AppCompatActivity() {
         revealAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
             override fun onAnimationEnd(animation: Animator) {
-                changeableLayout.visibility = View.INVISIBLE
+                cL.visibility = View.INVISIBLE
             }
 
             override fun onAnimationCancel(animation: Animator) {}

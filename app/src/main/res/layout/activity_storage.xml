@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,20 +14,20 @@
             android:layout_width="match_parent"
             android:layout_height="77dp"
             android:background="@color/colorPrimary"
-            app:contentInsetStart="0dp"
-            app:contentInsetLeft="0dp">
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:fontFamily="@font/iransansweblight"
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/iransansweblight"
                     android:text="انبار من"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
@@ -36,22 +36,22 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/icon_back"
+                    android:id="@+id/backBtn"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/ic_round_arrow_back_24"
-                    android:background="?attr/selectableItemBackgroundBorderless"/>
+                    app:srcCompat="@drawable/ic_round_arrow_back_24" />
 
                 <ImageButton
                     android:id="@+id/helpBtn"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tooltipText="راهنما"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textView"
-                    android:tooltipText="راهنما"
                     app:srcCompat="@drawable/ic_help"
                     app:tint="@android:color/white" />
 
@@ -60,10 +60,10 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
-            android:fontFamily="@font/iransansweblight"
-            android:id="@+id/tabs"
+            android:id="@+id/tabL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/iransansweblight"
             app:tabMode="scrollable" />
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -71,7 +71,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:background="@color/colorBackgroundDark"/>
+        android:background="@color/colorBackgroundDark"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

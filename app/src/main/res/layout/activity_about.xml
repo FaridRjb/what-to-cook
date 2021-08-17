@@ -7,7 +7,7 @@
     tools:context=".activities.AboutActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="77dp"
         android:background="@color/colorPrimary"
@@ -23,7 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/icon_back"
+                android:id="@+id/backBtn"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?actionBarSize"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -51,10 +51,10 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:fontFamily="@font/iransansweblight"
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/iransansweblight"
         android:text="چی بپزیم؟"
         android:textColor="?colorPrimary"
         android:textSize="25sp"
@@ -65,7 +65,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        app:layout_constraintVertical_bias="1"
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,8 +72,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
         app:srcCompat="@mipmap/ic_launcher_foreground"
-        app:tint="@color/colorPrimary"/>
+        app:tint="@color/colorPrimary" />
 
     <TextView
         android:id="@+id/versionTV"
@@ -93,9 +93,9 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="com.faridrjb.whattocook"
         android:layout_margin="4dp"
         android:fontFamily="@font/iransansweblight"
+        android:text="com.faridrjb.whattocook"
         android:textColor="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

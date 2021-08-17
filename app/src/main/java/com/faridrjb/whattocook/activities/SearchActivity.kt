@@ -14,30 +14,27 @@ import android.text.TextWatcher
 import android.text.Editable
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faridrjb.whattocook.databinding.ActivitySearchBinding
 import java.util.ArrayList
 
 class SearchActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivitySearchBinding
+
     var dbHelper: DatabaseHelper? = null
-    var db: SQLiteDatabase? = null
-    var back: ImageButton? = null
-    var inputSearch: TextInputEditText? = null
     var foodList: ArrayList<Food>? = null
-    var searchList: RecyclerView? = null
-    var rvAdapter: SearchRVAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
         dbHelper = DatabaseHelper(this)
-        db = dbHelper!!.readableDatabase
-        searchList = findViewById(R.id.searchList)
         foodList = dbHelper!!.getFood("")
         refreshDisplay()
-        back = findViewById(R.id.icon_back)
-        back!!.setOnClickListener(View.OnClickListener { finish() })
-        inputSearch = findViewById(R.id.inputSearch)
-        inputSearch!!.addTextChangedListener(object : TextWatcher {
+        binding.searchBar.backBtn.setOnClickListener(View.OnClickListener { finish() })
+        binding.searchBar.inputSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 foodList = dbHelper!!.getFood(s.toString())
@@ -49,8 +46,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun refreshDisplay() {
-        rvAdapter = SearchRVAdapter(this, foodList!!)
-        searchList!!.adapter = rvAdapter
-        searchList!!.layoutManager = LinearLayoutManager(this)
+        binding.searchRV.adapter = SearchRVAdapter(this, foodList!!)
+        binding.searchRV.layoutManager = LinearLayoutManager(this)
     }
 }

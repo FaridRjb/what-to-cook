@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SearchActivity"
-    android:background="@color/colorBackgroundDark">
+    android:background="@color/colorBackgroundDark"
+    tools:context=".activities.SearchActivity">
 
     <include
         android:id="@+id/search_bar"
@@ -13,7 +13,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchList"
+        android:id="@+id/searchRV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

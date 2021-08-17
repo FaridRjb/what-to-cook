@@ -30,29 +30,31 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
+import com.faridrjb.whattocook.databinding.ActivityIntroSliderBinding
+import com.faridrjb.whattocook.databinding.ActivityMainBinding
+import com.faridrjb.whattocook.databinding.DialogFragHelpBinding
 import java.io.IOException
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     var db: DatabaseHelper? = null
-    var inputSearch: TextInputEditText? = null
-    var floatingButton: FloatingActionButton? = null
-    var toolbar: Toolbar? = null
-    var infoBtn: ImageButton? = null
-    var posMore: TextView? = null
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // DB
         db = DatabaseHelper(this)
         try {
             db!!.createDataBase()
         } catch (e: IOException) {
-            Toast.makeText(this, "Wrong 1", Toast.LENGTH_SHORT).show()
+            throw IOException()
         }
         db!!.openDataBase()
         //---
@@ -64,54 +66,45 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             Handler().postDelayed(
-                { findViewById<FrameLayout>(R.id.splashFL).visibility = GONE },
+                { binding.splashFL.visibility = GONE },
                 3000
             )
         }
         //----------
 
         // Toolbar
-        toolbar = findViewById(R.layout.app_bar_main)
-        setSupportActionBar(toolbar)
-        infoBtn = findViewById(R.id.infoBtn)
-        infoBtn!!.setOnClickListener(View.OnClickListener {
+        setSupportActionBar(binding.toolbar.root)
+        binding.toolbar.infoBtn.setOnClickListener {
             startActivity(
                 Intent(
                     this@MainActivity,
                     AboutActivity::class.java
                 )
             )
-        })
+        }
         //--------
-
-        // Init
-        inputSearch = findViewById(R.id.inputSearch)
-        floatingButton = findViewById(R.id.floatingButton)
-        posMore = findViewById(R.id.posMore)
-        //-----
 
         // Favorite Fragment
         supportFragmentManager.beginTransaction().replace(R.id.favFragContainer, FavoriteFragment())
             .commit()
         //------------------
-        inputSearch!!.setOnFocusChangeListener { v, hasFocus ->
+        binding.inputSearch.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 startActivity(Intent(this@MainActivity, SearchActivity::class.java))
-                inputSearch!!.clearFocus()
+                binding.inputSearch.clearFocus()
             }
         }
-        floatingButton!!.setOnClickListener(View.OnClickListener {
+        binding.floatingButton.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this@MainActivity, StorageActivity::class.java))
         })
-        posMore!!.setOnClickListener {
+        binding.posMore.setOnClickListener {
             val intent = Intent(this@MainActivity, PosFavActivity::class.java)
             intent.putExtra("IntentToPosFav", "PossibleFoods")
             startActivity(intent)
         }
 
         // help btn
-        val helpBtn = findViewById<ImageButton>(R.id.helpBtn)
-        helpBtn.setOnClickListener { showHelpDialog() }
+        binding.toolbar.helpBtn.setOnClickListener { showHelpDialog() }
         //----------
     }
 
@@ -121,8 +114,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadPossibleList() {
-        val posNotFoundTV = findViewById<TextView>(R.id.posNotFoundTV)
-        posNotFoundTV.visibility = View.GONE
+        binding.posNotFoundTV.visibility = GONE
         val allInits = ArrayList<String>()
         val a = resources.getStringArray(R.array.hoboobaat_names)
         val b = resources.getStringArray(R.array.ghallaat_names)
@@ -153,29 +145,28 @@ class MainActivity : AppCompatActivity() {
             firstFivePossibleFoods.add(possibleFoods[i])
             if (firstFivePossibleFoods.size == 5) break
         }
-        if (firstFivePossibleFoods.size == 0) posNotFoundTV.visibility = View.VISIBLE
-        val resList = findViewById<RecyclerView>(R.id.possibleList)
-        val possiblervAdapter = PossibleRVAdapter(this, firstFivePossibleFoods)
-        resList.adapter = possiblervAdapter
-        resList.layoutManager = LinearLayoutManager(this)
+        if (firstFivePossibleFoods.size == 0) binding.posNotFoundTV.visibility = View.VISIBLE
+        binding.possibleRV.adapter = PossibleRVAdapter(this, firstFivePossibleFoods)
+        binding.possibleRV.layoutManager = LinearLayoutManager(this)
     }
 
     private fun startCircularReveal() {
-        val revealLayout = findViewById<RelativeLayout>(R.id.layoutReveal)
-        val centerX = (floatingButton!!.right + floatingButton!!.left) / 2
-        val centerY = (floatingButton!!.bottom + floatingButton!!.top) / 2
-        val endRadius = Math.hypot(revealLayout.width.toDouble(), revealLayout.height.toDouble())
+        val fB = binding.floatingButton
+        val rL = binding.revealLayout
+        val centerX = (fB.right + fB.left) / 2
+        val centerY = (fB.bottom + fB.top) / 2
+        val endRadius = Math.hypot(rL.width.toDouble(), rL.height.toDouble())
             .toFloat()
-        revealLayout.visibility = View.VISIBLE
+        rL.visibility = View.VISIBLE
         val revealAnimator = ViewAnimationUtils.createCircularReveal(
-            revealLayout,
+            rL,
             centerX, centerY, 0f, endRadius
         )
         revealAnimator.setDuration(200).start()
         revealAnimator.addListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(animation: Animator) {}
             override fun onAnimationEnd(animation: Animator) {
-                revealLayout.visibility = View.INVISIBLE
+                rL.visibility = View.INVISIBLE
             }
 
             override fun onAnimationCancel(animation: Animator) {}
@@ -185,10 +176,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showHelpDialog() {
         val builder = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.dialog_frag_help, null)
-        val helpTV = view.findViewById<TextView>(R.id.helpTV)
-        val s = resources.getStringArray(R.array.help_texts)[1]
-        helpTV.text = s
+        val helpDialogBinding = DialogFragHelpBinding.inflate(layoutInflater)
+        val view = helpDialogBinding.root
+        val msg = resources.getStringArray(R.array.help_texts)[1]
+        helpDialogBinding.helpTV.text = msg
         builder.setView(view)
         builder.create().show()
     }
