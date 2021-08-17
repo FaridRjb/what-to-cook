@@ -114,6 +114,7 @@
         <item>خرما</item>
         <item>آلبالو</item>
         <item>کاهو</item>
+        <item>انبه</item>
     </string-array>
     <string-array name="chaashni_names">
         <item>نمک</item>
@@ -150,6 +151,8 @@
         <item>پودر پیاز</item>
         <item>رب ازگیل</item>
         <item>فلفل قرمز</item>
+        <item>زیره</item>
+        <item>پودر دارچین</item>
     </string-array>
     <string-array name="kareh_roghan_names">
         <item>کره</item>
@@ -173,6 +176,7 @@
         <item>ماهی تیلا پیلا</item>
         <item>ماهی سفید</item>
         <item>ماهی کیلکا</item>
+        <item>جگر گوسفند</item>
     </string-array>
     <string-array name="others_names">
         <item>مخمر فوری</item>
@@ -188,6 +192,7 @@
         <item>پوست پرتقال</item>
         <item>سس خردل</item>
         <item>پودر سوخاری</item>
+        <item>شیر نارگیل</item>
     </string-array>
     <string-array name="khoshkbar_names">
         <item>آلو برقان</item>
