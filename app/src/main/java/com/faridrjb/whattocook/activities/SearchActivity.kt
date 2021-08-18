@@ -33,7 +33,7 @@ class SearchActivity : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
         foodList = dbHelper!!.getFood("")
         refreshDisplay()
-        binding.searchBar.backBtn.setOnClickListener(View.OnClickListener { finish() })
+        binding.searchBar.backBtn.setOnClickListener { finish() }
         binding.searchBar.inputSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {

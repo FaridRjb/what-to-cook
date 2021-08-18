@@ -17,39 +17,44 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.content.SharedPreferences
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.databinding.FragmentFavoriteBinding
 import java.util.ArrayList
 
 class FavoriteFragment : Fragment() {
 
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
+
     var foodList: ArrayList<Food>? = null
     var favorites: ArrayList<Food>? = null
     var adapter: FavoriteFragRVAdapter? = null
-    var notFound: TextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_favorite, container, false)
-        val favMore = rootView.findViewById<TextView>(R.id.favMore)
-        favMore.setOnClickListener {
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.favMore.setOnClickListener {
             val intent = Intent(activity, PosFavActivity::class.java)
             intent.putExtra("IntentToPosFav", "Favorite")
             startActivity(intent)
         }
         val dbHelper = DatabaseHelper(requireContext())
-        notFound = rootView.findViewById(R.id.favFragNotFound)
         foodList = ArrayList()
         foodList = dbHelper.getFood("")
         favorites = ArrayList()
         loadFavorites()
-        val recyclerView: RecyclerView = rootView.findViewById(R.id.recyclerView2)
         adapter = FavoriteFragRVAdapter(requireContext(), favorites!!)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager =
+        binding.favRV.adapter = adapter
+        binding.favRV.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
-        return rootView
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -60,9 +65,14 @@ class FavoriteFragment : Fragment() {
         adapter!!.notifyDataSetChanged()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun loadFavorites() {
         val preferences = requireContext().getSharedPreferences("Favorite", Context.MODE_PRIVATE)
-        notFound!!.visibility = View.GONE
+        binding.favFragNotFound.visibility = View.GONE
         for (i in foodList!!.indices) {
             if (preferences.getBoolean(foodList!![i].foodName, false)) {
                 favorites!!.add(foodList!![i])
@@ -70,7 +80,7 @@ class FavoriteFragment : Fragment() {
             }
         }
         if (favorites!!.size == 0) {
-            notFound!!.visibility = View.VISIBLE
+            binding.favFragNotFound.visibility = View.VISIBLE
         }
     }
 }

@@ -7,11 +7,11 @@
     android:background="@color/colorPrimary">
 
     <ImageView
-        android:id="@+id/logoImage102"
+        android:id="@+id/iconIV"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:padding="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv103"
+        app:layout_constraintBottom_toTopOf="@+id/titleTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,28 +20,28 @@
         app:srcCompat="@drawable/ic_kitchen" />
 
     <TextView
-        android:fontFamily="@font/iransansweblight"
-        android:id="@+id/tv103"
+        android:id="@+id/titleTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/iransansweblight"
         android:text="انبار من"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tv104"
+        app:layout_constraintBottom_toTopOf="@+id/descTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoImage102" />
+        app:layout_constraintTop_toBottomOf="@+id/iconIV" />
 
     <TextView
-        android:fontFamily="@font/iransansweblight"
-        android:id="@+id/tv104"
+        android:id="@+id/descTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/iransansweblight"
         android:gravity="center"
         android:text="لیست مواد غذایی موجودتان را با ما به اشتراک بگذارید\n«چی بخوریم؟» دستیار شما در آشپزخانه"
         android:textColor="@android:color/white"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv103" />
+        app:layout_constraintTop_toBottomOf="@+id/titleTV" />
 
     <View
         android:id="@+id/view"
@@ -60,19 +60,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnNext102"/>
+        app:layout_constraintTop_toTopOf="@+id/nextBtn" />
 
     <Button
-        android:fontFamily="@font/iransansweblight"
-        android:id="@+id/btnNext102"
+        android:id="@+id/nextBtn"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="150dp"
         android:layout_height="60dp"
-        android:text="بعدی"
-        android:textSize="18sp"
-        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/iransansweblight"
         android:gravity="start|center_vertical"
+        android:text="بعدی"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

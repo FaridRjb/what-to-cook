@@ -4,37 +4,49 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import com.faridrjb.whattocook.R
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.faridrjb.whattocook.databinding.FragmentSlideBinding
 
 class SlideFragment : Fragment() {
+
+    private var _binding: FragmentSlideBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_slide, container, false)
-        val next = rootView.findViewById<Button>(R.id.btnNext102)
+        _binding = FragmentSlideBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         if (arguments != null) {
-            (rootView.findViewById<ImageView>(R.id.logoImage102)).setImageResource(
+            binding.iconIV.setImageResource(
                 requireArguments().getInt("imgResId")
             )
-            (rootView.findViewById<TextView>(R.id.tv103)).text =
+            binding.titleTV.text =
                 requireArguments().getString("title")
-            (rootView.findViewById<TextView>(R.id.tv104)).text =
+            binding.descTV.text =
                 requireArguments().getString("description")
-            if (requireArguments().getString("btnNext") != null) next.text =
+            if (requireArguments().getString("btnNext") != null) binding.nextBtn.text =
                 requireArguments().getString("btnNext")
         }
-        next.setOnClickListener { v ->
+        binding.nextBtn.setOnClickListener { v ->
             val activity = activity as CallBacks?
             activity!!.nextClicked(v.id)
         }
-        return rootView
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     interface CallBacks {

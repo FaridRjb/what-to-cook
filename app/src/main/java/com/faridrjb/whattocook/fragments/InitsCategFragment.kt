@@ -9,25 +9,39 @@ import com.faridrjb.whattocook.R
 import androidx.recyclerview.widget.RecyclerView
 import com.faridrjb.whattocook.recyclerviewadapters.StorageItemsAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faridrjb.whattocook.databinding.FragmentInitsCategBinding
+import com.faridrjb.whattocook.databinding.FragmentSlideBinding
 import java.text.Collator
 import java.util.*
 
 class InitsCategFragment(var itemsArrayID: Int) : Fragment() {
+
+    private var _binding: FragmentInitsCategBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.list_storage, container, false)
-        val recyclerView: RecyclerView = rootView.findViewById(R.id.itemList1)
+        _binding = FragmentInitsCategBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val itemList = ArrayList(Arrays.asList(*resources.getStringArray(itemsArrayID)))
         val collator = Collator.getInstance(Locale("fa", "IR"))
         collator.strength = Collator.PRIMARY
         Collections.sort(itemList, collator)
         val adapter = StorageItemsAdapter(requireContext(), itemList)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        return rootView
+        binding.initsCategRV.adapter = adapter
+        binding.initsCategRV.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
