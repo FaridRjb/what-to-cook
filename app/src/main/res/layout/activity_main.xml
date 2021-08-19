@@ -105,6 +105,7 @@
         tools:visibility="gone">
 
         <ImageView
+            android:id="@+id/splashIV"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"

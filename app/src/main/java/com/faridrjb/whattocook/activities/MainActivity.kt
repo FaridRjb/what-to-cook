@@ -16,6 +16,8 @@ import com.faridrjb.whattocook.fragments.PossibleFragment
 import com.faridrjb.whattocook.databinding.ActivityMainBinding
 import com.faridrjb.whattocook.databinding.DialogFragHelpBinding
 import java.io.IOException
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                 { binding.splashFL.visibility = GONE },
                 3000
             )
+            splashAnimation()
         }
         //----------
 
@@ -94,5 +97,13 @@ class MainActivity : AppCompatActivity() {
         helpDialogBinding.helpTV.text = msg
         builder.setView(view)
         builder.create().show()
+    }
+
+    private fun splashAnimation() {
+        val animation: Animation = AnimationUtils.loadAnimation(
+            this,
+            R.anim.come_up
+        )
+        binding.splashIV.startAnimation(animation)
     }
 }
