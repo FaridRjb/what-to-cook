@@ -11,17 +11,20 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
-            android:id="@+id/action_dashboardFragment_to_storageFragment"
+            android:id="@+id/actionDashboardToStorage"
             app:destination="@id/storageFragment" />
         <action
-            android:id="@+id/action_dashboardFragment_to_searchFragment"
+            android:id="@+id/actionDashboardToSearch"
             app:destination="@id/searchFragment" />
         <action
-            android:id="@+id/action_dashboardFragment_to_aboutFragment"
+            android:id="@+id/actionDashboardToAbout"
             app:destination="@id/aboutFragment" />
         <action
-            android:id="@+id/action_dashboardFragment_to_posFavFragment"
+            android:id="@+id/actionDashboardToPosFav"
             app:destination="@id/posFavFragment" />
+        <action
+            android:id="@+id/actionDashboardToDesc"
+            app:destination="@id/descFragment" />
     </fragment>
     <fragment
         android:id="@+id/storageFragment"
@@ -34,8 +37,11 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_dashboardFragment"
+            android:id="@+id/actionSearchToDashboard"
             app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/actionSearchToDesc"
+            app:destination="@id/descFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -43,12 +49,31 @@
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" >
         <action
-            android:id="@+id/action_aboutFragment_to_dashboardFragment"
+            android:id="@+id/actionAboutToDashboard"
             app:destination="@id/dashboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/posFavFragment"
         android:name="com.faridrjb.whattocook.PosFavFragment"
         android:label="fragment_pos_fav"
-        tools:layout="@layout/fragment_pos_fav" />
+        tools:layout="@layout/fragment_pos_fav" >
+        <action
+            android:id="@+id/actionPosFavToDashboard"
+            app:destination="@id/dashboardFragment" />
+        <argument
+            android:name="cameFor"
+            app:argType="string" />
+        <action
+            android:id="@+id/actionPosFavToDesc"
+            app:destination="@id/descFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/descFragment"
+        android:name="com.faridrjb.whattocook.DescFragment"
+        android:label="fragment_desc"
+        tools:layout="@layout/fragment_desc" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
 </navigation>

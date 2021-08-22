@@ -1,6 +1,5 @@
 package com.faridrjb.whattocook.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faridrjb.whattocook.DashboardFragmentDirections
 import com.faridrjb.whattocook.Food
 import com.faridrjb.whattocook.FoodsChecker
 import com.faridrjb.whattocook.R
-import com.faridrjb.whattocook.activities.PosFavActivity
 import com.faridrjb.whattocook.data.DatabaseHelper
 import com.faridrjb.whattocook.databinding.FragmentPossibleBinding
-import com.faridrjb.whattocook.recyclerviewadapters.PossibleRVAdapter
+import com.faridrjb.whattocook.adapters.PossibleRVAdapter
 import java.util.ArrayList
 
 class PossibleFragment : Fragment() {
@@ -43,9 +42,8 @@ class PossibleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.posMore.setOnClickListener {
-            val intent = Intent(activity, PosFavActivity::class.java)
-            intent.putExtra("IntentToPosFav", "PossibleFoods")
-            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_posFavFragment)
+            val action = DashboardFragmentDirections.actionDashboardToPosFav("PossibleFoods")
+            Navigation.findNavController(binding.root).navigate(action)
         }
         loadPossibleList()
     }
@@ -87,13 +85,15 @@ class PossibleFragment : Fragment() {
         }
         var possibleFoods = ArrayList<Food>()
         val firstFivePossibleFoods = ArrayList<Food>()
-        possibleFoods = FoodsChecker().possibleFoods(requireContext(), initsInStorage, db!!.getFood(""))
+        possibleFoods =
+            FoodsChecker().possibleFoods(requireContext(), initsInStorage, db!!.getFood(""))
         for (i in possibleFoods.indices) { // just show first 5 items
             firstFivePossibleFoods.add(possibleFoods[i])
             if (firstFivePossibleFoods.size == 5) break
         }
         if (firstFivePossibleFoods.size == 0) binding.posNotFoundTV.visibility = View.VISIBLE
-        binding.possibleRV.adapter = PossibleRVAdapter(requireContext(), firstFivePossibleFoods)
+        binding.possibleRV.adapter =
+            PossibleRVAdapter(requireContext(), requireActivity(), firstFivePossibleFoods)
         binding.possibleRV.layoutManager = LinearLayoutManager(requireContext())
     }
 }

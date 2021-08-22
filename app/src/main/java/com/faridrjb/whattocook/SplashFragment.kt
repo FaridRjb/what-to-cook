@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.navigation.Navigation
-import com.faridrjb.whattocook.databinding.FragmentMainBinding
 import com.faridrjb.whattocook.databinding.FragmentSplashBinding
 
 
@@ -39,10 +38,10 @@ class SplashFragment : Fragment() {
         Handler().postDelayed({
             if (requireContext().getSharedPreferences("First Time", MODE_PRIVATE).getBoolean("First time", true)) {
                 Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_splashFragment_to_introFragment)
+                    .navigate(R.id.actionSplashToIntro)
             } else {
                 Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_splashFragment_to_mainFragment)
+                    .navigate(R.id.actionSplashToMain)
             }
         }, 3000)
     }

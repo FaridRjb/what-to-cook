@@ -1,4 +1,4 @@
-package com.faridrjb.whattocook
+package com.faridrjb.whattocook.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -1,57 +1,63 @@
-package com.faridrjb.whattocook.activities
+package com.faridrjb.whattocook
 
 import android.animation.Animator
-import androidx.appcompat.app.AppCompatActivity
-import android.database.sqlite.SQLiteDatabase
-import com.faridrjb.whattocook.data.DatabaseHelper
-import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.faridrjb.whattocook.R
-import com.faridrjb.whattocook.recyclerviewadapters.InitsNeededRVAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager
-import android.content.SharedPreferences
-import com.faridrjb.whattocook.activities.FoodDescActivity
-import android.view.ViewAnimationUtils
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.net.Uri
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.*
-import androidx.appcompat.widget.Toolbar
-import com.faridrjb.whattocook.ScreenUtility
-import com.faridrjb.whattocook.databinding.ActivityFoodDescBinding
-import java.util.*
+import android.view.ViewAnimationUtils
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.faridrjb.whattocook.adapters.InitsNeededRVAdapter
+import com.faridrjb.whattocook.data.DatabaseHelper
+import com.faridrjb.whattocook.databinding.FragmentDescBinding
+import java.util.ArrayList
 
-class FoodDescActivity : AppCompatActivity() {
+class DescFragment : Fragment() {
 
-    private lateinit var binding: ActivityFoodDescBinding
+    private var _binding: FragmentDescBinding? = null
+    private val binding get() = _binding!!
 
+    val FAVORITE_PREF = "Favorite"
+    val args: DescFragmentArgs by navArgs()
     var db: SQLiteDatabase? = null
     var dbHelper: DatabaseHelper? = null
     var FOOD_NAME: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityFoodDescBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+    }
 
-        dbHelper = DatabaseHelper(this)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentDescBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        dbHelper = DatabaseHelper(requireContext())
         dbHelper!!.openDataBase()
         db = dbHelper!!.readableDatabase
 
-        // Toolbar
-        setSupportActionBar(binding.toolbar.root)
-        binding.toolbar.backBtn.setOnClickListener { finish() }
-        //--------
+        binding.toolbar.backBtn.setOnClickListener {
+            TODO("where did i come from???")
+        }
 
         // Food Name
-        val bundle = intent.extras
-        if (bundle!!.containsKey("name")) {
-            FOOD_NAME = bundle.getString("name")
+            FOOD_NAME = args.name
             binding.toolbar.tvFoodName.text = FOOD_NAME
-        }
         //----------
         refreshDisplay()
 
@@ -65,17 +71,20 @@ class FoodDescActivity : AppCompatActivity() {
         addToFavourite()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun refreshDisplay() {
         // Image
         binding.foodImageView.setImageResource(
-            applicationContext.resources.getIdentifier(
+            requireContext().resources.getIdentifier(
                 "drawable/" + dbHelper!!.getFoodPhoto(
                     FOOD_NAME!!
-                ), null, applicationContext.packageName
+                ), null, requireContext().packageName
             )
         )
-        //------
-
         // RecyclerView - Initials List
         val initsList =
             ArrayList(listOf(*dbHelper!!.getFoodInits(FOOD_NAME!!).split("-").toTypedArray()))
@@ -84,24 +93,31 @@ class FoodDescActivity : AppCompatActivity() {
                 *dbHelper!!.getFoodInitsAmount(FOOD_NAME!!).split("-").toTypedArray()
             )
         )
-        binding.recyclerView.adapter = InitsNeededRVAdapter(this, initsList, initsAmountList)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        if (ScreenUtility(this@FoodDescActivity).width >= 600) binding.recyclerView.layoutManager =
-            GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = InitsNeededRVAdapter(requireContext(), initsList, initsAmountList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        if (ScreenUtility(requireActivity()).width >= 600) binding.recyclerView.layoutManager =
+            GridLayoutManager(requireContext(), 2)
         //-----------------------------
-
-        // Instruction
         binding.txtInstruction.text = dbHelper!!.getFoodInstruc(FOOD_NAME!!)
-        //------------
+
+        binding.webTV1.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://parsiday.com")))
+        }
+        binding.webTV2.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://chishi.ir")))
+        }
     }
 
     private fun addToFavourite() {
-        val preferences = getSharedPreferences(FAVORITE_PREF, MODE_PRIVATE)
+        val preferences = requireContext().getSharedPreferences(
+            FAVORITE_PREF,
+            AppCompatActivity.MODE_PRIVATE
+        )
         val editor = preferences.edit()
         if (preferences.getBoolean(FOOD_NAME, false)) {
             binding.likeBtn.setImageResource(R.drawable.ic_favorite_filled)
         }
-        binding.likeBtn.setOnClickListener(View.OnClickListener {
+        binding.likeBtn.setOnClickListener {
             if (!preferences.getBoolean(FOOD_NAME, false)) {
                 startCircularReveal()
                 editor.putBoolean(FOOD_NAME, true)
@@ -111,7 +127,7 @@ class FoodDescActivity : AppCompatActivity() {
                 binding.likeBtn.setImageResource(R.drawable.ic_favorite)
             }
             editor.apply()
-        })
+        }
     }
 
     private fun startCircularReveal() {
@@ -139,18 +155,5 @@ class FoodDescActivity : AppCompatActivity() {
             override fun onAnimationCancel(animation: Animator) {}
             override fun onAnimationRepeat(animation: Animator) {}
         })
-    }
-
-    fun onClickWeb(view: View) {
-        val browserIntent: Intent = when (view.id) {
-            R.id.webTV2 -> Intent(Intent.ACTION_VIEW, Uri.parse("https://parsiday.com"))
-            R.id.webTV3 -> Intent(Intent.ACTION_VIEW, Uri.parse("https://chishi.ir"))
-            else -> return
-        }
-        startActivity(browserIntent)
-    }
-
-    companion object {
-        const val FAVORITE_PREF = "Favorite"
     }
 }

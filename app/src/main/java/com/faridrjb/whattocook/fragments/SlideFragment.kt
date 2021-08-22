@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import com.faridrjb.whattocook.R
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.viewpager.widget.ViewPager
 import com.faridrjb.whattocook.databinding.FragmentSlideBinding
 
 class SlideFragment : Fragment() {
@@ -38,19 +39,25 @@ class SlideFragment : Fragment() {
             if (requireArguments().getString("btnNext") != null) binding.nextBtn.text =
                 requireArguments().getString("btnNext")
         }
-        binding.nextBtn.setOnClickListener { v ->
-            val activity = activity as CallBacks?
-            activity!!.nextClicked(v.id)
+
+        // Next Btn
+        val rv = requireActivity().findViewById<ViewPager>(R.id.introSliderVP)
+        binding.nextBtn.setOnClickListener {
+            if (rv.currentItem + 1 == rv.adapter!!.count) {
+                val preferences = requireContext().getSharedPreferences("First Time", AppCompatActivity.MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.putBoolean("First time", false)
+                editor.apply()
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.actionIntroToMain)
+            }
+            rv.currentItem = rv.currentItem + 1
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    interface CallBacks {
-        fun nextClicked(nextBtnId: Int)
     }
 
     companion object {

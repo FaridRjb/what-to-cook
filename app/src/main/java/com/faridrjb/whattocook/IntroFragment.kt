@@ -15,7 +15,7 @@ import com.faridrjb.whattocook.databinding.FragmentIntroBinding
 import com.faridrjb.whattocook.fragments.SlideFragment
 import java.util.*
 
-class IntroFragment : Fragment(), SlideFragment.CallBacks {
+class IntroFragment : Fragment() {
 
     private var _binding: FragmentIntroBinding? = null
     private val binding get() = _binding!!
@@ -91,17 +91,5 @@ class IntroFragment : Fragment(), SlideFragment.CallBacks {
         fun addFragment(fragment: Fragment) {
             fragmentList.add(fragment)
         }
-    }
-
-    override fun nextClicked(nextBtnId: Int) {
-        if (binding.introSliderVP.currentItem + 1 == adapter!!.count) {
-            val preferences = requireContext().getSharedPreferences("First Time", AppCompatActivity.MODE_PRIVATE)
-            val editor = preferences.edit()
-            editor.putBoolean("First time", false)
-            editor.apply()
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_introFragment_to_mainFragment)
-        }
-        binding.introSliderVP.currentItem = binding.introSliderVP.currentItem + 1
     }
 }

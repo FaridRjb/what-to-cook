@@ -1,15 +1,11 @@
 package com.faridrjb.whattocook.activities
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import com.faridrjb.whattocook.fragments.InitsCategFragment
 import com.faridrjb.whattocook.R
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.faridrjb.whattocook.ViewPagerAdapter
+import com.faridrjb.whattocook.adapters.ViewPagerAdapter
 import com.faridrjb.whattocook.databinding.ActivityStorageBinding
 import com.faridrjb.whattocook.databinding.DialogFragHelpBinding
 

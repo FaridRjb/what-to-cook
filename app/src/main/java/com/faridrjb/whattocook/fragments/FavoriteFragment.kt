@@ -3,21 +3,16 @@ package com.faridrjb.whattocook.fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import com.faridrjb.whattocook.Food
-import com.faridrjb.whattocook.recyclerviewadapters.FavoriteFragRVAdapter
-import android.widget.TextView
+import com.faridrjb.whattocook.adapters.FavoriteFragRVAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
-import com.faridrjb.whattocook.R
-import android.content.Intent
-import com.faridrjb.whattocook.activities.PosFavActivity
 import com.faridrjb.whattocook.data.DatabaseHelper
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.content.SharedPreferences
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.faridrjb.whattocook.DashboardFragmentDirections
 import com.faridrjb.whattocook.databinding.FragmentFavoriteBinding
 import java.util.ArrayList
 
@@ -43,16 +38,15 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.favMore.setOnClickListener {
-            val intent = Intent(activity, PosFavActivity::class.java)
-            intent.putExtra("IntentToPosFav", "Favorite")
-            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_posFavFragment)
+            val action = DashboardFragmentDirections.actionDashboardToPosFav("Favorite")
+            Navigation.findNavController(binding.root).navigate(action)
         }
         val dbHelper = DatabaseHelper(requireContext())
         foodList = ArrayList()
         foodList = dbHelper.getFood("")
         favorites = ArrayList()
         loadFavorites()
-        adapter = FavoriteFragRVAdapter(requireContext(), favorites!!)
+        adapter = FavoriteFragRVAdapter(requireContext(), requireActivity(), favorites!!)
         binding.favRV.adapter = adapter
         binding.favRV.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)

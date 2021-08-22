@@ -1,20 +1,13 @@
-package com.faridrjb.whattocook.recyclerviewadapters
+package com.faridrjb.whattocook.adapters
 
 import android.content.Context
-import com.faridrjb.whattocook.Food
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.faridrjb.whattocook.R
-import android.content.Intent
-import com.faridrjb.whattocook.activities.FoodDescActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.TextView
-import com.makeramen.roundedimageview.RoundedImageView
 import android.widget.RelativeLayout
-import android.content.SharedPreferences
 import android.view.View
-import android.widget.CheckBox
 import java.util.ArrayList
 
 class InitsNeededRVAdapter(

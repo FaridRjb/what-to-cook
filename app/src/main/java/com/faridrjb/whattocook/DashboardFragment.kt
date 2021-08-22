@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.Navigation
 import com.faridrjb.whattocook.databinding.DialogFragHelpBinding
@@ -35,16 +34,16 @@ class DashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.floatingButton.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_storageFragment)
+            Navigation.findNavController(binding.root).navigate(R.id.actionDashboardToStorage)
         }
         binding.inputSearch.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 binding.inputSearch.clearFocus()
-                Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_searchFragment)
+                Navigation.findNavController(binding.root).navigate(R.id.actionDashboardToSearch)
             }
         }
         binding.toolbar.infoBtn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_aboutFragment)
+            Navigation.findNavController(binding.root).navigate(R.id.actionDashboardToAbout)
         }
         binding.toolbar.helpBtn.setOnClickListener { showHelpDialog() }
 

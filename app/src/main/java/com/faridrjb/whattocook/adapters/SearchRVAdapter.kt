@@ -1,5 +1,6 @@
-package com.faridrjb.whattocook.recyclerviewadapters
+package com.faridrjb.whattocook.adapters
 
+import android.app.Activity
 import android.content.Context
 import com.faridrjb.whattocook.Food
 import androidx.recyclerview.widget.RecyclerView
@@ -7,19 +8,20 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.faridrjb.whattocook.R
 import android.content.Intent
-import com.faridrjb.whattocook.activities.FoodDescActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.TextView
 import com.makeramen.roundedimageview.RoundedImageView
 import android.widget.RelativeLayout
-import android.content.SharedPreferences
 import android.view.View
-import android.widget.CheckBox
+import androidx.navigation.Navigation
+import com.faridrjb.whattocook.DashboardFragmentDirections
+import com.faridrjb.whattocook.SearchFragmentDirections
 import java.util.ArrayList
 
-class PossibleRVAdapter(private val context: Context, foods: ArrayList<Food>) :
-    RecyclerView.Adapter<PossibleRVAdapter.ViewHolder>() {
+class SearchRVAdapter(private val context: Context, val activity: Activity, foods: ArrayList<Food>) :
+    RecyclerView.Adapter<SearchRVAdapter.ViewHolder>() {
+
     private var foods = ArrayList<Food>()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -39,9 +41,8 @@ class PossibleRVAdapter(private val context: Context, foods: ArrayList<Food>) :
             )
         )
         holder.parentLayout.setOnClickListener {
-            val intent = Intent(context, FoodDescActivity::class.java)
-            intent.putExtra("name", foods[position].foodName)
-            context.startActivity(intent)
+            val action = SearchFragmentDirections.actionSearchToDesc(foods[position].foodName!!)
+            Navigation.findNavController(activity.findViewById(R.id.searchCL)).navigate(action)
         }
     }
 

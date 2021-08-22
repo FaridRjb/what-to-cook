@@ -10,9 +10,8 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faridrjb.whattocook.data.DatabaseHelper
-import com.faridrjb.whattocook.databinding.FragmentAboutBinding
 import com.faridrjb.whattocook.databinding.FragmentSearchBinding
-import com.faridrjb.whattocook.recyclerviewadapters.SearchRVAdapter
+import com.faridrjb.whattocook.adapters.SearchRVAdapter
 import java.util.ArrayList
 
 class SearchFragment : Fragment() {
@@ -44,7 +43,7 @@ class SearchFragment : Fragment() {
         refreshDisplay()
         binding.searchBar.backBtn.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_searchFragment_to_dashboardFragment)
+                .navigate(R.id.actionSearchToDashboard)
         }
         binding.searchBar.inputSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -63,7 +62,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun refreshDisplay() {
-        binding.searchRV.adapter = SearchRVAdapter(requireContext(), foodList!!)
+        binding.searchRV.adapter = SearchRVAdapter(requireContext(), requireActivity(), foodList!!)
         binding.searchRV.layoutManager = LinearLayoutManager(requireContext())
     }
 }

@@ -11,10 +11,10 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_introFragment"
+            android:id="@+id/actionSplashToIntro"
             app:destination="@id/introFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_mainFragment"
+            android:id="@+id/actionSplashToMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
@@ -23,7 +23,7 @@
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
-            android:id="@+id/action_introFragment_to_mainFragment"
+            android:id="@+id/actionIntroToMain"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment

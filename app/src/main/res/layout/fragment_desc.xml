@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundDark"
-    tools:context=".activities.FoodDescActivity">
+    tools:context=".DescFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
@@ -223,7 +223,6 @@
                                 android:layout_marginBottom="8dp"
                                 android:fontFamily="@font/iransansweblight"
                                 android:lineSpacingExtra="8sp"
-                                android:onClick="onClickWeb"
                                 android:text="chishi.ir"
                                 android:textColor="@color/colorPrimary" />
                         </LinearLayout>

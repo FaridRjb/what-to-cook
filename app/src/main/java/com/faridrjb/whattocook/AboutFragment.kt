@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.faridrjb.whattocook.databinding.FragmentAboutBinding
-import com.faridrjb.whattocook.databinding.FragmentDashboardBinding
 
 class AboutFragment : Fragment() {
 
@@ -35,7 +34,7 @@ class AboutFragment : Fragment() {
         binding.versionTV.text = "نسخه " + BuildConfig.VERSION_NAME
         binding.backBtn.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_aboutFragment_to_dashboardFragment)
+                .navigate(R.id.actionAboutToDashboard)
         }
         binding.emailBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)

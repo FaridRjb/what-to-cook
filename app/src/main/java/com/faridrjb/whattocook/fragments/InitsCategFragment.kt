@@ -5,12 +5,10 @@ import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.faridrjb.whattocook.R
 import androidx.recyclerview.widget.RecyclerView
-import com.faridrjb.whattocook.recyclerviewadapters.StorageItemsAdapter
+import com.faridrjb.whattocook.adapters.StorageItemsAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faridrjb.whattocook.databinding.FragmentInitsCategBinding
-import com.faridrjb.whattocook.databinding.FragmentSlideBinding
 import java.text.Collator
 import java.util.*
 
