@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faridrjb.whattocook.Food
 import com.faridrjb.whattocook.FoodsChecker
@@ -44,7 +45,7 @@ class PossibleFragment : Fragment() {
         binding.posMore.setOnClickListener {
             val intent = Intent(activity, PosFavActivity::class.java)
             intent.putExtra("IntentToPosFav", "PossibleFoods")
-            startActivity(intent)
+            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_posFavFragment)
         }
         loadPossibleList()
     }

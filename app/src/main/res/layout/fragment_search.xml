@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundDark"
-    tools:context=".activities.SearchActivity">
+    tools:context=".SearchFragment">
 
     <include
         android:id="@+id/search_bar"
-        layout="@layout/app_bar_search" />
+        layout="@layout/app_bar_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView

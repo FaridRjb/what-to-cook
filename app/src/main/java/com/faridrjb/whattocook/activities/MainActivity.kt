@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     var db: DatabaseHelper? = null
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,69 +40,5 @@ class MainActivity : AppCompatActivity() {
         }
         db!!.openDataBase()
         //---
-
-        // New Comer
-        val newComerPref = getSharedPreferences("First Time", MODE_PRIVATE)
-        if (newComerPref.getBoolean("First time", true)) {
-            startActivity(Intent(this@MainActivity, IntroSliderActivity::class.java))
-            finish()
-        } else {
-            Handler().postDelayed(
-                { binding.splashFL.visibility = GONE },
-                3000
-            )
-            splashAnimation()
-        }
-        //----------
-
-        // Toolbar
-        setSupportActionBar(binding.toolbar.root)
-        binding.toolbar.infoBtn.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@MainActivity,
-                    AboutActivity::class.java
-                )
-            )
-        }
-        //--------
-
-        // Fragments
-        supportFragmentManager.beginTransaction().replace(R.id.posFragContainer, PossibleFragment())
-            .commit()
-        supportFragmentManager.beginTransaction().replace(R.id.favFragContainer, FavoriteFragment())
-            .commit()
-        //------------------
-        binding.inputSearch.setOnFocusChangeListener { v, hasFocus ->
-            if (hasFocus) {
-                startActivity(Intent(this@MainActivity, SearchActivity::class.java))
-                binding.inputSearch.clearFocus()
-            }
-        }
-        binding.floatingButton.setOnClickListener(View.OnClickListener {
-            startActivity(Intent(this@MainActivity, StorageActivity::class.java))
-        })
-
-        // help btn
-        binding.toolbar.helpBtn.setOnClickListener { showHelpDialog() }
-        //----------
-    }
-
-    private fun showHelpDialog() {
-        val builder = AlertDialog.Builder(this)
-        val helpDialogBinding = DialogFragHelpBinding.inflate(layoutInflater)
-        val view = helpDialogBinding.root
-        val msg = resources.getStringArray(R.array.help_texts)[1]
-        helpDialogBinding.helpTV.text = msg
-        builder.setView(view)
-        builder.create().show()
-    }
-
-    private fun splashAnimation() {
-        val animation: Animation = AnimationUtils.loadAnimation(
-            this,
-            R.anim.come_up
-        )
-        binding.splashIV.startAnimation(animation)
     }
 }

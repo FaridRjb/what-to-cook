@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.content.SharedPreferences
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.faridrjb.whattocook.databinding.FragmentFavoriteBinding
 import java.util.ArrayList
 
@@ -44,7 +45,7 @@ class FavoriteFragment : Fragment() {
         binding.favMore.setOnClickListener {
             val intent = Intent(activity, PosFavActivity::class.java)
             intent.putExtra("IntentToPosFav", "Favorite")
-            startActivity(intent)
+            Navigation.findNavController(binding.root).navigate(R.id.action_dashboardFragment_to_posFavFragment)
         }
         val dbHelper = DatabaseHelper(requireContext())
         foodList = ArrayList()
