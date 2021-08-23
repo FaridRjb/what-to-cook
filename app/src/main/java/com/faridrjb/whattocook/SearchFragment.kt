@@ -43,7 +43,7 @@ class SearchFragment : Fragment() {
         refreshDisplay()
         binding.searchBar.backBtn.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.actionSearchToDashboard)
+                .navigateUp()
         }
         binding.searchBar.inputSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}

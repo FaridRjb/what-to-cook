@@ -60,7 +60,7 @@ class PosFavFragment : Fragment() {
         binding.posFavRV.layoutManager = GridLayoutManager(requireContext(), spanCount)
         binding.backBtn.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.actionPosFavToDashboard)
+                .navigateUp()
         }
     }
 

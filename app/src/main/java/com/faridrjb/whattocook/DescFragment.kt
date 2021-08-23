@@ -12,6 +12,7 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +53,7 @@ class DescFragment : Fragment() {
         db = dbHelper!!.readableDatabase
 
         binding.toolbar.backBtn.setOnClickListener {
-            TODO("where did i come from???")
+            Navigation.findNavController(binding.root).navigateUp()
         }
 
         // Food Name

@@ -34,7 +34,7 @@ class AboutFragment : Fragment() {
         binding.versionTV.text = "نسخه " + BuildConfig.VERSION_NAME
         binding.backBtn.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.actionAboutToDashboard)
+                .navigateUp()
         }
         binding.emailBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO)

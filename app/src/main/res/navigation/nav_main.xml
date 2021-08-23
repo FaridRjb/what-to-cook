@@ -9,69 +9,73 @@
         android:id="@+id/dashboardFragment"
         android:name="com.faridrjb.whattocook.DashboardFragment"
         android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" >
+        tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/actionDashboardToStorage"
-            app:destination="@id/storageFragment" />
+            app:destination="@id/storageFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/actionDashboardToSearch"
-            app:destination="@id/searchFragment" />
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/actionDashboardToAbout"
-            app:destination="@id/aboutFragment" />
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/actionDashboardToPosFav"
-            app:destination="@id/posFavFragment" />
+            app:destination="@id/posFavFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/actionDashboardToDesc"
-            app:destination="@id/descFragment" />
+            app:destination="@id/descFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/storageFragment"
         android:name="com.faridrjb.whattocook.StorageFragment"
         android:label="fragment_storage"
-        tools:layout="@layout/fragment_storage" />
+        tools:layout="@layout/fragment_storage"></fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.faridrjb.whattocook.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/actionSearchToDashboard"
-            app:destination="@id/dashboardFragment" />
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/actionSearchToDesc"
-            app:destination="@id/descFragment" />
+            app:destination="@id/descFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.faridrjb.whattocook.AboutFragment"
         android:label="fragment_about"
-        tools:layout="@layout/fragment_about" >
-        <action
-            android:id="@+id/actionAboutToDashboard"
-            app:destination="@id/dashboardFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_about"></fragment>
     <fragment
         android:id="@+id/posFavFragment"
         android:name="com.faridrjb.whattocook.PosFavFragment"
         android:label="fragment_pos_fav"
-        tools:layout="@layout/fragment_pos_fav" >
-        <action
-            android:id="@+id/actionPosFavToDashboard"
-            app:destination="@id/dashboardFragment" />
+        tools:layout="@layout/fragment_pos_fav">
         <argument
             android:name="cameFor"
             app:argType="string" />
         <action
             android:id="@+id/actionPosFavToDesc"
-            app:destination="@id/descFragment" />
+            app:destination="@id/descFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/descFragment"
         android:name="com.faridrjb.whattocook.DescFragment"
         android:label="fragment_desc"
-        tools:layout="@layout/fragment_desc" >
+        tools:layout="@layout/fragment_desc">
         <argument
             android:name="name"
             app:argType="string" />

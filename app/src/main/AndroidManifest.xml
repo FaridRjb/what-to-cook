@@ -9,16 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.PosFavActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.IntroSliderActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.StorageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.FoodDescActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.SearchActivity"
-            android:screenOrientation="portrait"/>
         <activity android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
