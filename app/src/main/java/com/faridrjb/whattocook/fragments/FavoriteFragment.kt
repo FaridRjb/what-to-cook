@@ -49,7 +49,7 @@ class FavoriteFragment : Fragment() {
         adapter = FavoriteFragRVAdapter(requireContext(), requireActivity(), favorites!!)
         binding.favRV.adapter = adapter
         binding.favRV.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true)
+            LinearLayoutManager(requireContext())
     }
 
     @SuppressLint("NotifyDataSetChanged")

@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import com.faridrjb.whattocook.R
-import android.content.Intent
 import android.widget.TextView
-import com.makeramen.roundedimageview.RoundedImageView
 import android.widget.RelativeLayout
 import android.view.View
+import android.widget.ImageView
 import androidx.navigation.Navigation
-import com.faridrjb.whattocook.DashboardFragmentDirections
 import com.faridrjb.whattocook.SearchFragmentDirections
 import java.util.ArrayList
 
@@ -27,7 +25,7 @@ class SearchRVAdapter(private val context: Context, val activity: Activity, food
         viewType: Int
     ): ViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.list_item_food, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_food_large, parent, false)
         return ViewHolder(view)
     }
 
@@ -53,12 +51,12 @@ class SearchRVAdapter(private val context: Context, val activity: Activity, food
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var parentLayout: RelativeLayout
         var foodName: TextView
-        var foodImg: RoundedImageView
+        var foodImg: ImageView
 
         init {
-            parentLayout = itemView.findViewById(R.id.layoutFoodItem)
-            foodName = itemView.findViewById(R.id.txtFood)
-            foodImg = itemView.findViewById(R.id.imgFood)
+            parentLayout = itemView.findViewById(R.id.searchItemRL)
+            foodName = itemView.findViewById(R.id.searchItemTV)
+            foodImg = itemView.findViewById(R.id.searchItemIV)
         }
     }
 

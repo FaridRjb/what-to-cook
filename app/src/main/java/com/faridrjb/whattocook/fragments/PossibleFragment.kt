@@ -76,7 +76,7 @@ class PossibleFragment : Fragment() {
                 allInits.add(item)
             }
         }
-        val preferences = activity?.getSharedPreferences("Storage", AppCompatActivity.MODE_PRIVATE)
+        val preferences = requireActivity().getSharedPreferences("Storage", AppCompatActivity.MODE_PRIVATE)
         val initsInStorage = ArrayList<String>()
         for (item in allInits) {
             if (preferences!!.getBoolean(item, false)) {
@@ -94,6 +94,7 @@ class PossibleFragment : Fragment() {
         if (firstFivePossibleFoods.size == 0) binding.posNotFoundTV.visibility = View.VISIBLE
         binding.possibleRV.adapter =
             PossibleRVAdapter(requireContext(), requireActivity(), firstFivePossibleFoods)
-        binding.possibleRV.layoutManager = LinearLayoutManager(requireContext())
+        binding.possibleRV.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
     }
 }

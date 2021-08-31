@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:background="@color/colorPrimary"
-    android:elevation="5dp"
+    android:layout_height="wrap_content"
     app:contentInsetLeft="0dp"
     app:contentInsetStart="0dp">
 
@@ -13,22 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="?attr/actionBarSize"
-            android:layout_height="?actionBarSize"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_round_arrow_back_24" />
-
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/searchTIL"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="2dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/background_list"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -37,13 +26,13 @@
             app:boxStrokeColor="@android:color/transparent"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/backBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_search">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/inputSearch"
+                android:id="@+id/searchTIET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransansweblight"
@@ -51,7 +40,5 @@
                 android:inputType="textPersonName"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.appcompat.widget.Toolbar>

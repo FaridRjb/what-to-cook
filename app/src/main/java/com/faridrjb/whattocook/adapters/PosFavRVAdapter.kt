@@ -12,6 +12,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import android.widget.TextView
 import com.makeramen.roundedimageview.RoundedImageView
 import android.view.View
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.navigation.Navigation
 import com.faridrjb.whattocook.DashboardFragmentDirections
 import com.faridrjb.whattocook.PosFavFragmentDirections
@@ -25,7 +27,7 @@ class PosFavRVAdapter(private val context: Context, val activity: Activity, food
         viewType: Int
     ): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_pos_fav, parent, false)
+            .inflate(R.layout.item_food_small, parent, false)
         return ViewHolder(view)
     }
 
@@ -49,14 +51,14 @@ class PosFavRVAdapter(private val context: Context, val activity: Activity, food
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var parentLayout: ConstraintLayout
+        var parentLayout: RelativeLayout
         var foodName: TextView
-        var foodImg: RoundedImageView
+        var foodImg: ImageView
 
         init {
-            parentLayout = itemView.findViewById(R.id.posFavC)
-            foodName = itemView.findViewById(R.id.posFavName)
-            foodImg = itemView.findViewById(R.id.posFavImg)
+            parentLayout = itemView.findViewById(R.id.foodSRL)
+            foodName = itemView.findViewById(R.id.foodSTV)
+            foodImg = itemView.findViewById(R.id.foodSIV)
         }
     }
 

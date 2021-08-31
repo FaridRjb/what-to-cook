@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faridrjb.whattocook.data.DatabaseHelper
@@ -41,11 +42,7 @@ class SearchFragment : Fragment() {
         dbHelper = DatabaseHelper(requireContext())
         foodList = dbHelper!!.getFood("")
         refreshDisplay()
-        binding.searchBar.backBtn.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigateUp()
-        }
-        binding.searchBar.inputSearch.addTextChangedListener(object : TextWatcher {
+        binding.searchBar.searchTIET.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 foodList = dbHelper!!.getFood(s.toString())
